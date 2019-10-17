@@ -88,7 +88,6 @@ namespace BaoDienTu.Areas.Admin.Controllers
             return View(collection);
         }
 
-        [HttpDelete]
         public ActionResult Delete(int id)
         {
             new ChannelModel().Delete(id);
