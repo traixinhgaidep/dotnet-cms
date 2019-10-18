@@ -22,18 +22,13 @@ namespace Models
             return list;
         }
 
-        public int Create(string title, int? idChannel, string image, string content, string author)
+        public int Create(Article entity)
         {
-            object[] parameters = 
-            {
-                new SqlParameter("@Title", title),
-                new SqlParameter("@IDChannel", idChannel),
-                new SqlParameter("@Image", image),
-                new SqlParameter("@Content", content),
-                new SqlParameter("@Author", author)
-            };
-            int res = context.Database.ExecuteSqlCommand("Sp_Article_Insert @Title,@IDChannel,@Image,@Content,@Author", parameters);
-            return res;
+            context.Articles.Add(entity);
+            context.SaveChanges();
+            return entity.IDArticle;
         }
+
+         
     }
 }

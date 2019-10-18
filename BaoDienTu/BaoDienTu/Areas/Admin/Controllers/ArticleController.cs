@@ -27,6 +27,8 @@ namespace BaoDienTu.Areas.Admin.Controllers
         // GET: Admin/Article/Create
         public ActionResult Create()
         {
+           // var model = new ArticleModel();
+            //int res = model.I
             return View();
         }
 
@@ -40,7 +42,7 @@ namespace BaoDienTu.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     var model = new ArticleModel();
-                    int res = model.Create(collection.Title, collection.IDChannel, collection.Image, collection.Content, collection.Author);
+                    int res = model.Create(collection);
                     if(res > 0)
                     {
                         return RedirectToAction("Index", "Article");
