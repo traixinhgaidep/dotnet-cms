@@ -16,7 +16,7 @@ namespace Models
             context = new BaoDienTuDBContext();
         }
 
-        public bool Login(string email, string password)
+        public int Login(string email, string password)
         {
             //object[] sqlParams =
             //{
@@ -25,14 +25,21 @@ namespace Models
             //};
             //var res = context.Database.SqlQuery<bool>("SP_Account_Login @Email,@Password", sqlParams).SingleOrDefault();
             //return res;
-            var result = context.Accounts.Count(x => x.Email == email && x.Password == password);
-            if (result > 0)
+            var result = context.Accounts.SingleOrDefault(x => x.Email == email);
+            if (result == null)
             {
-                return true;
+                return 0;
             }
             else
             {
-                return false;
+                if(result.Password == password)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 

@@ -29,17 +29,25 @@ namespace BaoDienTu.Areas.Admin.Controllers
             {
                 var dao = new AccountModel();
                 var result = dao.Login(model.Email, Encrytor.MD5Hash(model.Password));
-                if (result)
+                if (result == 1)
                 {
                     var user = dao.GetByEmail(model.Email);
                     var userSession = new UserLogin();
                     userSession.Email = user.Email;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Admin", "Channel","Index");
+                }
+                else if(result == 0)
+                {
+                    ModelState.AddModelError("", "Tai khoan khong ton tai.");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Mat khau khong dung.");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Email hoac mat khau khong dung");
+                    ModelState.AddModelError("", "Dang nhap khong thanh cong.");
                 }
             }
             return View(model);

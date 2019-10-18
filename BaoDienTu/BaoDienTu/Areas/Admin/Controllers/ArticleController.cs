@@ -5,15 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+//using PagedList;
 
 namespace BaoDienTu.Areas.Admin.Controllers
 {
     public class ArticleController : Controller
     {
         // GET: Admin/Article
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
             var iplArticle = new ArticleModel();
+            //var model = iplArticle.ListAll(page,pageSize);
             var model = iplArticle.ListAll();
             return View(model);
         }
@@ -27,9 +29,14 @@ namespace BaoDienTu.Areas.Admin.Controllers
         // GET: Admin/Article/Create
         public ActionResult Create()
         {
-           // var model = new ArticleModel();
-            //int res = model.I
+            SetViewBag();
             return View();
+        }
+
+        public void SetViewBag(int? selectedId = null)
+        {
+            var article = new ArticleModel();
+            ViewBag.IDChannel = new SelectList(article.ViewChannelID(), "IDChannel", "Name", selectedId);
         }
 
         // POST: Admin/Article/Create
@@ -42,8 +49,8 @@ namespace BaoDienTu.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     var model = new ArticleModel();
-                    int res = model.Create(collection);
-                    if(res > 0)
+                    int id = model.Create(collection);
+                    if(id > 0)
                     {
                         return RedirectToAction("Index", "Article");
                     }
@@ -56,31 +63,47 @@ namespace BaoDienTu.Areas.Admin.Controllers
             }
             catch
             {
+                SetViewBag();
                 return View();
             }
         }
 
         // GET: Admin/Article/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var article = new ArticleModel().ViewDetail(id);
+
+            return View(article);
         }
 
-        // POST: Admin/Article/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Article collection)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var model = new ArticleModel();
+                    bool res = model.Update(collection);
+                    if (res)
+                    {
+                        return RedirectToAction("Index", "Article");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Sửa báo không thành công");
+                }
+                return View(collection);
             }
             catch
             {
                 return View();
             }
         }
+
 
         // GET: Admin/Article/Delete/5
         public ActionResult Delete(int id)

@@ -1,6 +1,8 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -16,10 +18,14 @@ namespace Models
             context = new BaoDienTuDBContext();
         }
 
+        //public IEnumerable<Article> ListAll(int page, int pageSize)
+        //{
+        //    return context.Articles.ToPagedList(page,pageSize);
+        //}
+
         public List<Article> ListAll()
         {
-            var list = context.Database.SqlQuery<Article>("Sp_Article_ListAll").ToList();
-            return list;
+            return context.Articles.ToList();
         }
 
         public int Create(Article entity)
@@ -29,6 +35,34 @@ namespace Models
             return entity.IDArticle;
         }
 
-         
+        public bool Update(Article entity)
+        {
+            try
+            {
+                var article = context.Articles.Find(entity.IDArticle);
+                article.Title = entity.Title;
+                article.IDChannel = entity.IDChannel;
+                article.Image = entity.Image;
+                article.Content = entity.Content;
+                article.Author = entity.Author;
+                context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+           
+        } 
+
+        public Article ViewDetail(int id)
+        {
+            return context.Articles.Find(id);
+        }
+
+        public List<Channel> ViewChannelID()
+        {
+            return context.Channels.ToList();
+        }
     }
 }

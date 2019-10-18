@@ -18,7 +18,7 @@
     </section>
 
     <section class="content">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit","Channel",FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
