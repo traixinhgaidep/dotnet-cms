@@ -13,7 +13,7 @@ namespace BaoDienTu.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index(LoginModel model)
+        public ActionResult Index()
         {
             //if(Membership.ValidateUser(model.Email, model.Password) && ModelState.IsValid)
             //{
@@ -25,6 +25,12 @@ namespace BaoDienTu.Areas.Admin.Controllers
             //    ModelState.AddModelError("", "Ten dang nhap hoac mat khau khong dung");
             //}
             
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(LoginModel model)
+        {
             if (ModelState.IsValid)
             {
                 var dao = new AccountModel();
@@ -37,14 +43,14 @@ namespace BaoDienTu.Areas.Admin.Controllers
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     return RedirectToAction("Index", "Channel");
                 }
-                else if(result == 0)
+                else if (result == 0)
                 {
                     ModelState.AddModelError("", "Tai khoan khong ton tai.");
                 }
                 else if (result == -1)
                 {
                     ModelState.AddModelError("", "Mat khau khong dung.");
-                }
+                }                
                 else
                 {
                     ModelState.AddModelError("", "Dang nhap khong thanh cong.");

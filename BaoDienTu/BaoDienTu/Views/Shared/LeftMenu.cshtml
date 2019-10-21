@@ -29,6 +29,7 @@
     <li class="header">Channel</li>
     @foreach (var item in Model)
     {
-        <li class="active"><a href="@item.Link"><i class="fa fa-link"></i> <span>@item.Name</span></a></li>
+        var url = "/Channel/" + item.Name + "-" + item.IDChannel;
+        <li class="active"><a href="@url"><i class="fa fa-link"></i> <span>@item.Name</span></a></li>
     }
 </ul>

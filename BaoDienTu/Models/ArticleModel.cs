@@ -33,6 +33,11 @@ namespace Models
             return context.Articles.Where(x => x.IDChannel == idChannel).OrderByDescending(x => x.Date).Take(top).ToList();
         }
 
+        public List<Article> ListArticleByChannel(int idChannel)
+        {
+            return context.Articles.Where(x => x.IDChannel == idChannel).OrderByDescending(x => x.Date).ToList();
+        }
+
         public int Create(Article entity)
         {
             context.Articles.Add(entity);

@@ -22,6 +22,12 @@ namespace Models
             return list;
         }
 
+        public Channel FindName(int idChannel)
+        {
+            Channel channel = context.Channels.SingleOrDefault(x => x.IDChannel == idChannel);
+            return channel;
+        }
+
         public int Create(string name, int? count)
         {
             object[] parameters =

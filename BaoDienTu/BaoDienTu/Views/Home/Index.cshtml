@@ -13,7 +13,7 @@
     @*@{Html.RenderAction("ListArticle", "Home"); }*@
     @for(int i = 0; i< Model.Count;i++)
         {   
-            var url = "/Channel/" + Model[i].IDChannel;
+            var url = "/Channel/" + Model[i].Name + "-" + Model[i].IDChannel;
             <div class="content_top">
                 <div class="heading">
                     <h3>@Model[i].Name</h3>

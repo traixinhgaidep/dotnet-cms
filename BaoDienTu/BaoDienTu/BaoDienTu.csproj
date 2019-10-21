@@ -16040,6 +16040,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encrytor.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -16061,6 +16062,7 @@
     <Content Include="Views\Shared\LeftMenu.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\ListArticle.cshtml" />
+    <Content Include="Views\Channel\CategogyChannel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
