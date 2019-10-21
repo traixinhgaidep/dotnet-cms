@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace BaoDienTu.Areas.Admin.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
         // GET: Admin/Article
         public ActionResult Index(int page = 1, int pageSize = 5)
@@ -108,23 +108,8 @@ namespace BaoDienTu.Areas.Admin.Controllers
         // GET: Admin/Article/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Admin/Article/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            new ArticleModel().Delete(id);
+            return RedirectToAction("Index","Article");
         }
     }
 }

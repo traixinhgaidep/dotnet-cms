@@ -17,7 +17,7 @@ namespace BaoDienTu.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}",
-                new { action = "Index", controller="Login" }
+                new { action = "Index", controller="Login", id = UrlParameter.Optional }
             );
         }
     }

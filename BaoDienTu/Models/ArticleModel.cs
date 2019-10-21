@@ -28,6 +28,11 @@ namespace Models
             return context.Articles.ToList();
         }
 
+        public List<Article> ListArticleByChannel(int top, int idChannel)
+        {
+            return context.Articles.Where(x => x.IDChannel == idChannel).OrderByDescending(x => x.Date).Take(top).ToList();
+        }
+
         public int Create(Article entity)
         {
             context.Articles.Add(entity);
@@ -45,6 +50,7 @@ namespace Models
                 article.Image = entity.Image;
                 article.Content = entity.Content;
                 article.Author = entity.Author;
+                article.Date = DateTime.Now;
                 context.SaveChanges();
                 return true;
             }
@@ -53,7 +59,7 @@ namespace Models
                 return false;
             }
            
-        } 
+        }
 
         public bool Delete(int? idArticle)
         {
@@ -64,7 +70,7 @@ namespace Models
                 context.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }

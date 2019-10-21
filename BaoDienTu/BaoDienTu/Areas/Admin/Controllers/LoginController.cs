@@ -35,7 +35,7 @@ namespace BaoDienTu.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.Email = user.Email;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("Admin", "Channel","Index");
+                    return RedirectToAction("Index", "Channel");
                 }
                 else if(result == 0)
                 {
