@@ -31,20 +31,28 @@
                                 <th>Content</th>
                                 <th>Author</th>
                                 <th>Date</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                <tr id="row_@item.IDArticle">
                                     <th>@item.IDArticle</th>
                                     @*<th>@Html.ActionLink(item.Title.ToString(), "Edit", new { id = item.IDArticle })</th>*@
-                                    <th>@item.Title</th>
+                                    <th><a href="/Admin/Article/Edit/@item.IDArticle">@item.Title</a></th>
                                     <th>@item.IDChannel</th>
                                     <th>@item.Image</th>
                                     <th>@item.Content</th>
                                     <th>@item.Author</th>
                                     <th>@(item.Date.HasValue ? @item.Date.Value.ToString("dd/MM/yyyy") : "")</th>
+                                    <th>
+                                        @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDArticle }, new AjaxOptions
+                                         {
+                                             Confirm = "Ban co muon xoa?",
+                                             OnComplete = "$('#row_" + item.IDArticle + "').remove()",
+                                         })
+                                    </th>
                                 </tr>
                             }
                         </tbody>

@@ -55,6 +55,21 @@ namespace Models
            
         } 
 
+        public bool Delete(int? idArticle)
+        {
+            try
+            {
+                var article = context.Articles.Find(idArticle);
+                context.Articles.Remove(article);
+                context.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
         public Article ViewDetail(int id)
         {
             return context.Articles.Find(id);
