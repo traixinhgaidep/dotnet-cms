@@ -18,8 +18,12 @@ namespace Models.EF
         [Required(ErrorMessage = "Ban chua nhap ten danh muc")]        
         public string Name { get; set; }
 
+        public string Summary { get; set; }
+
         //[Range(0, Int32.MaxValue, ErrorMessage = "Ban phai nhap so.")]
         [DisplayName("So luong bai viet")]
         public int? Count { get; set; }
+
+        public string Link { get; set; }
     }
 }

@@ -1,17 +1,35 @@
-﻿
+﻿@model List<Models.EF.Channel>
 @{
-    Layout = null;
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listArticle = (List<List<Models.EF.Article>>)ViewBag.Article;
 }
 
-<!DOCTYPE html>
+@section header{
+    Trang chủ
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Trang chu</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<div class="content">
+    @*@{Html.RenderAction("ListArticle", "Home"); }*@
+    @for(int i = 0; i< Model.Count;i++)
+        {   
+            var url = "/Channel/" + Model[i].Name + "-" + Model[i].IDChannel;
+            <div class="content_top">
+                <div class="heading">
+                    <h3>@Model[i].Name</h3>
+                </div>
+                <div class="see">
+                    <a href="@url">Xem tat ca</a>
+                </div>
+            </div>
+            <div class="section-group">
+                @foreach (var itemA in listArticle[i])
+                {
+                    var urlA = "/Article/" + itemA.IDArticle;
+                    <a href="@urlA"><img src="@itemA.Image" alt="" /></a>
+                    <h4><a href="@urlA">@itemA.Title</a></h4>
+                    <h5>@itemA.Summary</h5>
+                }
+            </div>
+        }
+</div>

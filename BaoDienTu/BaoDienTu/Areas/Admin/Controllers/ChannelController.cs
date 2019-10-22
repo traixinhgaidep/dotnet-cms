@@ -8,9 +8,10 @@ using System.Web.Mvc;
 
 namespace BaoDienTu.Areas.Admin.Controllers
 {
-    public class ChannelController : Controller
+    public class ChannelController : BaseController
     {
         // GET: Admin/Channel
+        [Authorize]
         public ActionResult Index()
         {
             var iplChannel = new ChannelModel();

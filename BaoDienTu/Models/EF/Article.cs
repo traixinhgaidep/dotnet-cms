@@ -20,6 +20,9 @@ namespace Models.EF
         [StringLength(100)]
         public string Image { get; set; }
 
+        [StringLength(500)]
+        public string Summary { get; set; }
+
         [StringLength(1000)]
         public string Content { get; set; }
 
@@ -27,5 +30,8 @@ namespace Models.EF
         public string Author { get; set; }
 
         public DateTime? Date { get; set; }
+        
+        [StringLength(50)]
+        public string Link { get; set; }
     }
 }
