@@ -52,6 +52,7 @@ namespace NewsApp.Controllers
 
         //
         // GET: /Manage/Index
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
