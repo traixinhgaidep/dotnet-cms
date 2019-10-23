@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BaoDienTu.Areas.Admin.Controllers
 {
-    public class ChannelController : BaseController
+    public class ChannelController : Controller
     {
         // GET: Admin/Channel
         [Authorize]

@@ -4,6 +4,7 @@ namespace Models.EF
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public partial class BaoDienTuDBContext : DbContext
     {

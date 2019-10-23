@@ -41,6 +41,7 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -301,7 +302,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">@Html.ActionLink("Sign out", "Logout", "Login")</a>
+                                        <a href="#" class="btn btn-default btn-flat">@Html.ActionLink("Sign out", "Logout", "Account")</a>
                                     </div>
                                 </li>
                             </ul>
@@ -558,7 +559,12 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/Assets/Admin/dist/js/demo.js"></script>
     <script src="/Assets/Admin/plugins/ckfinder/ckfinder.js"></script>
-    @RenderSection("jsFooter",required:false)
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @RenderSection("jsFooter", required: false)
 </body>
 </html>
 
