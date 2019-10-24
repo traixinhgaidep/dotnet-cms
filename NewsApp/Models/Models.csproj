@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleModel.cs" />
     <Compile Include="ChannelModel.cs" />
     <Compile Include="EF\Article.cs" />
     <Compile Include="EF\AspNetRole.cs" />

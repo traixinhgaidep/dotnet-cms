@@ -175,6 +175,7 @@
     <Compile Include="Areas\Admin\Code\IdentityConfig.cs" />
     <Compile Include="Areas\Admin\Code\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChannelController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
@@ -7922,6 +7923,7 @@
     <Content Include="Assets\Admin\plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\Admin\plugins\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\Channel\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Article\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
