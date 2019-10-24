@@ -13,9 +13,9 @@ namespace NewsApp
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            Areas.Admin.FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Areas.Admin.BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
