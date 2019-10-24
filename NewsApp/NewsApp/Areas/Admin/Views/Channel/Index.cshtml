@@ -39,13 +39,13 @@
                                     @*<th><a href="/Admin/Channel/Edit/@item.IDChannel">@item.Name</a></th>*@
                                     <th><img src=@item.Image alt="" width="150" height="150" /></th>
                                     <th>@item.Summary</th>
-                                    @*<th>
+                                    <th>
                                         @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDChannel }, new AjaxOptions
-                               {
-                                   Confirm = "Ban co muon xoa?",
-                                   OnComplete = "$('#row_" + item.IDChannel + "').remove()",
-                               })
-                                    </th>*@
+                                           {
+                                               Confirm = "Bạn có muốn xóa danh mục này không?",
+                                               OnComplete = "$('#row_" + item.IDChannel + "').remove()",
+                                           })
+                                    </th>
                                 </tr>
                             }
                         </tbody>

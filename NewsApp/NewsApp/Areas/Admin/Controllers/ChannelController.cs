@@ -88,5 +88,11 @@ namespace NewsApp.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        public ActionResult Delete(int id)
+        {
+            new ChannelModel().Delete(id);
+            return RedirectToAction("Index", "Channel");
+        }
     }
 }

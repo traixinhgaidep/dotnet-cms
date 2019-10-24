@@ -54,5 +54,20 @@ namespace Models
         {
             return context.Channels.Find(idChannel);
         }
+
+        public bool Delete(int idChannel)
+        {
+            try
+            {
+                var channel = context.Channels.Find(idChannel);
+                context.Channels.Remove(channel);
+                context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
