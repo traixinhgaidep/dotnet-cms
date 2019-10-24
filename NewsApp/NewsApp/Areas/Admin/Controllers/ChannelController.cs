@@ -54,5 +54,39 @@ namespace NewsApp.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var channel = new ChannelModel().ViewDetail(id);
+            return View(channel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Channel collection)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var model = new ChannelModel();
+                    bool res = model.Update(collection);
+                    if (res)
+                    {
+                        return RedirectToAction("Index", "Channel");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Sửa danh mục báo không thành công");
+                }
+                return View(collection);
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

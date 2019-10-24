@@ -32,5 +32,27 @@ namespace Models
         {
             return context.Channels.ToList();
         }
+
+        public bool Update(Channel entity)
+        {
+            try
+            {
+                var channel = context.Channels.Find(entity.IDChannel);
+                channel.Name = entity.Name;
+                channel.Image = entity.Image;
+                channel.Summary = entity.Summary;
+                context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Channel ViewDetail(int idChannel)
+        {
+            return context.Channels.Find(idChannel);
+        }
     }
 }
