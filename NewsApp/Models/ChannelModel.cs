@@ -20,5 +20,17 @@ namespace Models
         {
             return context.Channels.ToList();
         }
+
+        public int Create(Channel entity)
+        {
+            context.Channels.Add(entity);
+            context.SaveChanges();
+            return entity.IDChannel;
+        }
+
+        public List<Channel> ViewChannelID()
+        {
+            return context.Channels.ToList();
+        }
     }
 }
