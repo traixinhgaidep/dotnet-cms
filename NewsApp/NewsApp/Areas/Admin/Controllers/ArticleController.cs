@@ -83,5 +83,11 @@ namespace NewsApp.Areas.Admin.Controllers
             }
             return View(newArticle);
         }
+
+        public ActionResult Delete(int id)
+        {
+            new ArticleModel().Delete(id);
+            return RedirectToAction("Index", "Article");
+        }
     }
 }

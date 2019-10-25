@@ -23,6 +23,7 @@ namespace Models
 
         public int Create(Article oArticle)
         {
+            oArticle.Date = DateTime.Now;
             context.Articles.Add(oArticle);
             context.SaveChanges();
             return oArticle.IDArticle;
@@ -56,6 +57,21 @@ namespace Models
         public Article ViewDetail(int id)
         {
             return context.Articles.Find(id);
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var article = context.Articles.Find(id);
+                context.Articles.Remove(article);
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
