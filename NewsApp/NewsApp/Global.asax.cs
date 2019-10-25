@@ -16,6 +16,7 @@ namespace NewsApp
             Areas.Admin.FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Areas.Admin.BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Areas.Frontend.BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

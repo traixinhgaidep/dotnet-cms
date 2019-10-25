@@ -194,6 +194,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Frontend\Code\BundleConfig.cs" />
+    <Compile Include="Areas\Frontend\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Frontend\FrontendAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7284,6 +7287,34 @@
     <Content Include="Assets\Admin\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Assets\Admin\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Assets\Admin\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Assets\Frontend\css\bootstrap.css" />
+    <Content Include="Assets\Frontend\css\style.css" />
+    <Content Include="Assets\Frontend\images\avatar.png" />
+    <Content Include="Assets\Frontend\images\banner.jpg" />
+    <Content Include="Assets\Frontend\images\icon3.png" />
+    <Content Include="Assets\Frontend\images\icons.svg" />
+    <Content Include="Assets\Frontend\images\img1.jpg" />
+    <Content Include="Assets\Frontend\images\img10.jpg" />
+    <Content Include="Assets\Frontend\images\img12.jpg" />
+    <Content Include="Assets\Frontend\images\img13.jpg" />
+    <Content Include="Assets\Frontend\images\img13.png" />
+    <Content Include="Assets\Frontend\images\img14.jpg" />
+    <Content Include="Assets\Frontend\images\img15.jpg" />
+    <Content Include="Assets\Frontend\images\img2.jpg" />
+    <Content Include="Assets\Frontend\images\img3.jpg" />
+    <Content Include="Assets\Frontend\images\img4.jpg" />
+    <Content Include="Assets\Frontend\images\img5.jpg" />
+    <Content Include="Assets\Frontend\images\img6.jpg" />
+    <Content Include="Assets\Frontend\images\img7.jpg" />
+    <Content Include="Assets\Frontend\images\img8.jpg" />
+    <Content Include="Assets\Frontend\images\img9.jpg" />
+    <Content Include="Assets\Frontend\images\likes.png" />
+    <Content Include="Assets\Frontend\images\link.png" />
+    <Content Include="Assets\Frontend\images\logo.png" />
+    <Content Include="Assets\Frontend\images\menu.png" />
+    <Content Include="Assets\Frontend\images\plus.png" />
+    <Content Include="Assets\Frontend\images\views.png" />
+    <Content Include="Assets\Frontend\js\jquery.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -7940,6 +7971,12 @@
     <Content Include="Areas\Admin\Views\Article\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Article\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Article\Edit.cshtml" />
+    <Content Include="Areas\Frontend\Views\web.config" />
+    <Content Include="Assets\Frontend\images\Thumbs.db" />
+    <Content Include="Areas\Frontend\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Frontend\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Frontend\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Frontend\Views\Shared\LeftMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7962,6 +7999,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Frontend\Models\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>

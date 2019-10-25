@@ -27,6 +27,11 @@ namespace Models
             return context.Articles.OrderByDescending(x => x.Date).ToPagedList(page, pageSize);
         }
 
+        public List<Article> ListArticleByChannel(int top, int idChannel)
+        {
+            return context.Articles.Where(x => x.IDChannel == idChannel).OrderByDescending(x => x.Date).Take(top).ToList();
+        }
+
         public int Create(Article oArticle)
         {
             oArticle.Date = DateTime.Now;

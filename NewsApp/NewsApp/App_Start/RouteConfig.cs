@@ -13,8 +13,6 @@ namespace NewsApp
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
-
             routes.MapRoute(
                name: "Admin",
                url: "Admin/{controller}/{action}/{id}",
