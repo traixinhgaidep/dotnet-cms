@@ -1,9 +1,6 @@
 ﻿using Models;
 using Models.EF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace NewsApp.Areas.Admin.Controllers
@@ -22,6 +19,7 @@ namespace NewsApp.Areas.Admin.Controllers
             var article = new ArticleModel();
             ViewBag.IDChannel = new SelectList(article.ViewArticleID(), "IDChannel", "Name", selectedID);
         }
+
         public ActionResult Create()
         {
             SetViewBag();
@@ -40,19 +38,50 @@ namespace NewsApp.Areas.Admin.Controllers
                     if (articleID > 0)
                     {
                         return RedirectToAction("Index", "Article");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", StringResource.ErrorAddArticle);
-                    }
+                    }                  
                 }
-                
+                else
+                {
+                    ModelState.AddModelError("", StringResource.ErrorAddArticle);
+                }
             }
             catch(Exception e)
             {
                 ModelState.AddModelError("", e.Message);
             }
             return View(oArticle);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var article = new ArticleModel().ViewDetail(id);
+            return View(article);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Article newArticle)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var res = new ArticleModel().Update(newArticle);
+                    if (res)
+                    {
+                        return RedirectToAction("Index", "Article");
+                    }                    
+                }
+                else
+                {
+                    ModelState.AddModelError("", StringResource.ErrorEditArticle);
+                }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return View(newArticle);
         }
     }
 }

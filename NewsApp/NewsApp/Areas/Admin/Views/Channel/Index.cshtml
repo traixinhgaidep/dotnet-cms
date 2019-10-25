@@ -5,53 +5,51 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Channel
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Channel</li>
-            </ol>
-        </section>
-
-        <section class="content">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Summary</th>
-                                <th></th>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Channel
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Channel</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Summary</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.IDChannel">
+                                <th>@item.IDChannel</th>
+                                <th><a href="/Admin/Channel/Edit/@item.IDChannel">@item.Name</a></th>
+                                <th><img src=@item.Image alt="" width="150" height="150" /></th>
+                                <th>@item.Summary</th>
+                                <th>
+                                    @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDChannel }, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn có muốn xóa danh mục này không?",
+                                           OnComplete = "$('#row_" + item.IDChannel + "').remove()",
+                                       })
+                                </th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr id="row_@item.IDChannel">
-                                    <th>@item.IDChannel</th>
-                                    @*<th>@Html.ActionLink(item.Name, "Edit", new { id = item.IDChannel })</th>*@
-                                    <th><a href="/Admin/Channel/Edit/@item.IDChannel">@item.Name</a></th>
-                                    <th><img src=@item.Image alt="" width="150" height="150" /></th>
-                                    <th>@item.Summary</th>
-                                    <th>
-                                        @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDChannel }, new AjaxOptions
-                                           {
-                                               Confirm = "Bạn có muốn xóa danh mục này không?",
-                                               OnComplete = "$('#row_" + item.IDChannel + "').remove()",
-                                           })
-                                    </th>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 

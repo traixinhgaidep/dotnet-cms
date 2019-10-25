@@ -16,7 +16,6 @@
             <li class="active">Article</li>
         </ol>
     </section>
-
     <section class="content">
         <div class="card-body">
             <div class="table-responsive">
@@ -38,7 +37,6 @@
                         {
                             <tr id="row_@item.IDArticle">
                                 <th>@item.IDArticle</th>
-                                @*<th>@Html.ActionLink(item.Title.ToString(), "Edit", new { id = item.IDArticle })</th>*@
                                 <th><a href="/Admin/Article/Edit/@item.IDArticle">@item.Title</a></th>
                                 <th>@item.IDChannel</th>
                                 <th><img src=@item.Image alt="" width="150" height="150" /></th>

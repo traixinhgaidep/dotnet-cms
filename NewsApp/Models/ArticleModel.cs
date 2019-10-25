@@ -32,5 +32,30 @@ namespace Models
         {
             return context.Channels.ToList();
         }
+
+        public bool Update(Article newArticle)
+        {
+            try
+            {
+                var oArticle = context.Articles.Find(newArticle.IDArticle);
+                oArticle.Title = newArticle.Title;
+                oArticle.Image = newArticle.Image;
+                oArticle.Summary = newArticle.Summary;
+                oArticle.Content = newArticle.Content;
+                oArticle.Author = newArticle.Author;
+                oArticle.Date = DateTime.Now;
+                context.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+        public Article ViewDetail(int id)
+        {
+            return context.Articles.Find(id);
+        }
     }
 }

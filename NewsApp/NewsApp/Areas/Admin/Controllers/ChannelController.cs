@@ -1,9 +1,6 @@
 ﻿using Models;
 using Models.EF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace NewsApp.Areas.Admin.Controllers
@@ -23,13 +20,13 @@ namespace NewsApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Channel collection)
+        public ActionResult Create(Channel ochannel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    int idChannel = new ChannelModel().Create(collection);
+                    int idChannel = new ChannelModel().Create(ochannel);
                     if (idChannel > 0)
                     {                       
                         return RedirectToAction("Index", "Channel");
@@ -38,13 +35,13 @@ namespace NewsApp.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", StringResource.ErrorAddChannel);
-                }
-                return View(collection);
+                }               
             }
             catch(Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
+            return View(ochannel);
         }
 
         public ActionResult Edit(int id)
@@ -55,14 +52,14 @@ namespace NewsApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Channel collection)
+        public ActionResult Edit(Channel newchannel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var model = new ChannelModel();
-                    bool res = model.Update(collection);
+                    bool res = model.Update(newchannel);
                     if (res)
                     {
                         return RedirectToAction("Index", "Channel");
@@ -71,13 +68,13 @@ namespace NewsApp.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", StringResource.ErrorEditChannel);
-                }
-                return View(collection);
+                }              
             }
             catch(Exception e)
             {
-                return View();
+                ModelState.AddModelError("", e.Message);
             }
+            return View(newchannel);
         }
 
         public ActionResult Delete(int id)
