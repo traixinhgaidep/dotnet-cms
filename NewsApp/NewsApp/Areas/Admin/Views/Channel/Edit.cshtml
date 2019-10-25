@@ -20,7 +20,7 @@
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <div class="content-header">
         <h1>
             Sửa danh mục báo
         </h1>
@@ -28,7 +28,7 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
             <li class="active">Sửa</li>
         </ol>
-    </section>
+    </div>
 
     <section class="content">
         @using (Html.BeginForm("Edit", "Channel", FormMethod.Post))
@@ -74,7 +74,7 @@
             </div>
         }
         <div>
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", "Channel")
         </div>
     </section>
 </div>

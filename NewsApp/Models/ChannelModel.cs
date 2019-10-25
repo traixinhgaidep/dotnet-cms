@@ -28,10 +28,6 @@ namespace Models
             return entity.IDChannel;
         }
 
-        public List<Channel> ViewChannelID()
-        {
-            return context.Channels.ToList();
-        }
 
         public bool Update(Channel entity)
         {

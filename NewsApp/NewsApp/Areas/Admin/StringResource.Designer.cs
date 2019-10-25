@@ -61,11 +61,29 @@ namespace NewsApp.Areas.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm bài báo không thành công..
+        /// </summary>
+        public static string ErrorAddArticle {
+            get {
+                return ResourceManager.GetString("ErrorAddArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm danh mục báo không thành công..
         /// </summary>
         public static string ErrorAddChannel {
             get {
                 return ResourceManager.GetString("ErrorAddChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa bài báo không thành công..
+        /// </summary>
+        public static string ErrorEditArticle {
+            get {
+                return ResourceManager.GetString("ErrorEditArticle", resourceCulture);
             }
         }
         

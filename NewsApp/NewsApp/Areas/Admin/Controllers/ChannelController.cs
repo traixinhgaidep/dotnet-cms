@@ -17,15 +17,8 @@ namespace NewsApp.Areas.Admin.Controllers
             return View(channel);
         }
 
-        public void SetViewBag(int? selectedId = null)
-        {
-            var channel = new ChannelModel();
-            ViewBag.IDChannel = new SelectList(channel.ViewChannelID(), "IDChannel", "Name", selectedId);
-        }
-
         public ActionResult Create()
         {
-            SetViewBag();
             return View();
         }
 
@@ -50,7 +43,6 @@ namespace NewsApp.Areas.Admin.Controllers
             }
             catch(Exception ex)
             {
-                SetViewBag();
                 return View();
             }
         }

@@ -21,9 +21,16 @@ namespace Models
             return context.Articles.ToList();
         }
 
-        //public int Create(Article )
-        //{
-        //    var
-        //}
+        public int Create(Article oArticle)
+        {
+            context.Articles.Add(oArticle);
+            context.SaveChanges();
+            return oArticle.IDArticle;
+        }
+
+        public List<Channel> ViewArticleID()
+        {
+            return context.Channels.ToList();
+        }
     }
 }

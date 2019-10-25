@@ -7932,6 +7932,7 @@
     <Content Include="Assets\Admin\plugins\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\Channel\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Article\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Article\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
