@@ -20,5 +20,10 @@ namespace Models
         {
             return context.Articles.ToList();
         }
+
+        //public int Create(Article )
+        //{
+        //    var
+        //}
     }
 }

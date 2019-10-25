@@ -6,13 +6,13 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Channel")]
     public partial class Channel
     {
         [Key]
         public int IDChannel { get; set; }
 
-        [StringLength(15)]
+        [StringLength(15, ErrorMessage = "So ki tu toi da la 15")]
+        [Required(ErrorMessage = "Ban chua nhap ten danh muc")]
         public string Name { get; set; }
 
         [StringLength(50)]

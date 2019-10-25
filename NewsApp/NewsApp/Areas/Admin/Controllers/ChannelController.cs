@@ -23,13 +23,13 @@ namespace NewsApp.Areas.Admin.Controllers
             ViewBag.IDChannel = new SelectList(channel.ViewChannelID(), "IDChannel", "Name", selectedId);
         }
 
-        [HttpGet]
         public ActionResult Create()
         {
             SetViewBag();
             return View();
         }
 
+        [HttpPost]
         public ActionResult Create(Channel collection)
         {
             try
@@ -38,13 +38,13 @@ namespace NewsApp.Areas.Admin.Controllers
                 {
                     int idChannel = new ChannelModel().Create(collection);
                     if (idChannel > 0)
-                    {
+                    {                       
                         return RedirectToAction("Index", "Channel");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm danh mục báo không thành công.");
+                    ModelState.AddModelError("", StringResource.ErrorAddChannel);
                 }
                 return View(collection);
             }
@@ -55,7 +55,6 @@ namespace NewsApp.Areas.Admin.Controllers
             }
         }
 
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             var channel = new ChannelModel().ViewDetail(id);
@@ -79,11 +78,11 @@ namespace NewsApp.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Sửa danh mục báo không thành công");
+                    ModelState.AddModelError("", StringResource.ErrorEditChannel);
                 }
                 return View(collection);
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
