@@ -8,10 +8,10 @@ namespace NewsApp.Areas.Admin.Controllers
     public class ChannelController : Controller
     {
         // GET: Admin/Channel
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            var channel = new ChannelModel().ListAll();
-            return View(channel);
+            var listchannel = new ChannelModel().ListAllPaging(page,pageSize);
+            return View(listchannel);
         }
 
         public ActionResult Create()

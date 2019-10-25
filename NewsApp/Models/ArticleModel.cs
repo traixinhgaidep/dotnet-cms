@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace Models
         public List<Article> ListAll()
         {
             return context.Articles.ToList();
+        }
+
+        public IEnumerable<Article> ListAllPaging(int page, int pageSize)
+        {
+            return context.Articles.OrderByDescending(x => x.Date).ToPagedList(page, pageSize);
         }
 
         public int Create(Article oArticle)

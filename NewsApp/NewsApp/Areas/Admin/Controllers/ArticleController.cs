@@ -8,9 +8,9 @@ namespace NewsApp.Areas.Admin.Controllers
     public class ArticleController : Controller
     {
         // GET: Admin/Article
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            var listArticle = new ArticleModel().ListAll();
+            var listArticle = new ArticleModel().ListAllPaging(page, pageSize);
             return View(listArticle);
         }
 
@@ -38,14 +38,14 @@ namespace NewsApp.Areas.Admin.Controllers
                     if (articleID > 0)
                     {
                         return RedirectToAction("Index", "Article");
-                    }                  
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError("", StringResource.ErrorAddArticle);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModelState.AddModelError("", e.Message);
             }
@@ -70,14 +70,14 @@ namespace NewsApp.Areas.Admin.Controllers
                     if (res)
                     {
                         return RedirectToAction("Index", "Article");
-                    }                    
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError("", StringResource.ErrorEditArticle);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
             }

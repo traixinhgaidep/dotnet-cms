@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace Models
         public List<Channel> ListAll()
         {
             return context.Channels.ToList();
+        }
+
+        public IEnumerable<Channel> ListAllPaging(int page, int pageSize)
+        {
+            return context.Channels.OrderBy(x => x.IDChannel).ToPagedList(page, pageSize);
         }
 
         public int Create(Channel entity)
