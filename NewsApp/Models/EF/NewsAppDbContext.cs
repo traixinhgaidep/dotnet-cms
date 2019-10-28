@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class NewsAppDbContext : DbContext
     {
         public NewsAppDbContext()
-            : base("name=NewsAppDbContext")
+            : base("name=DefaultConnection")
         {
         }
 

@@ -195,6 +195,7 @@
       <DependentUpon>StringResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Frontend\Code\BundleConfig.cs" />
+    <Compile Include="Areas\Frontend\Controllers\ChannelController.cs" />
     <Compile Include="Areas\Frontend\Controllers\HomeController.cs" />
     <Compile Include="Areas\Frontend\FrontendAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
@@ -7977,6 +7978,7 @@
     <Content Include="Areas\Frontend\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Frontend\Views\Home\Index.cshtml" />
     <Content Include="Areas\Frontend\Views\Shared\LeftMenu.cshtml" />
+    <Content Include="Areas\Frontend\Views\Channel\ListArticleByChannel.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -8056,6 +8058,8 @@
           <DevelopmentServerPort>59153</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44371/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44371/Frontend/Home/Index</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
