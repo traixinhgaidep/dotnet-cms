@@ -19,7 +19,8 @@ namespace NewsApp.Areas.Frontend.Controllers
         {
             int page = 1; int pageSize = 5;
             var listArticle = new ArticleModel().ListAllPagingByChannel(id, page, pageSize);
-            //ViewBag.NameChannel = name;
+            var channel = new ChannelModel().ViewDetail(id);
+            ViewBag.NameChannel = channel.Name;
             return View(listArticle);
         }
     }

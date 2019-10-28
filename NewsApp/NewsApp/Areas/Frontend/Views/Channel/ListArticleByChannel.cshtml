@@ -15,12 +15,12 @@
 <div class="grids">
     @foreach (var item in Model)
     {
-        var url = "/Frontend/Article/" + item.IDArticle;
+        var url = "/Frontend/Article/ViewArticle/" + item.IDArticle;
         <div class="grid box">
             <div class="grid-header">
                 <h4><a href="@url">@item.Title</a></h4>
                 <ul>
-                    <li><span>Post By <a href="#">@item.Author</a> on @item.Date</span></li>
+                    <li><span>Post By @item.Author on @item.Date</span></li>
                 </ul>
             </div>
             <div class="grid-img-content">

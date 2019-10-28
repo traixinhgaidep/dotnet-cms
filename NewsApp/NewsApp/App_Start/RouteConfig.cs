@@ -17,13 +17,20 @@ namespace NewsApp
                name: "Admin",
                url: "Admin/{controller}/{action}/{id}",
                defaults: new { action = "Index", controller = "Home", id = UrlParameter.Optional },
-               namespaces: new[] { "NewsApp.Areas" }
+               namespaces: new[] { "NewsApp.Areas.Admin" }
             );
 
             routes.MapRoute(
-                name: "Frontend",
+                name: "FrontendChannel",
                 url: "Frontend/{controller}/{action}/{id}",
                 defaults: new { action = "ListArticleByChannel", controller = "Channel", id = UrlParameter.Optional },
+                namespaces: new[] { "NewsApp.Areas.Frontend" }
+            );
+
+            routes.MapRoute(
+                name: "FrontendArticle",
+                url: "Frontend/{controller}/{action}/{id}",
+                defaults: new { action = "ViewArticle", controller = "Article", id = UrlParameter.Optional },
                 namespaces: new[] { "NewsApp.Areas.Frontend" }
             );
 

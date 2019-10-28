@@ -1,0 +1,29 @@
+﻿@model Models.EF.Article
+
+@{
+    ViewBag.Title = "ViewArticle";
+    Layout = "~/Areas/Frontend/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    @Model.Title
+}
+
+<div class="grid box">
+    <div class="grid-header">
+        <ul>
+            <li><span>Post By @Model.Author on @Model.Date</span></li>
+        </ul>
+    </div>
+    <div class="singlepage">
+        <img src=@Model.Image class="img-responsive" />
+        <p class="sng">@Model.Summary</p>
+        <p>@Model.Content</p>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div>
+    <a href="/Frontend/Channel/ListArticleByChannel/@Model.IDChannel">Back to list</a>  
+</div>
+<div class="clearfix"> </div>
+

@@ -30,7 +30,7 @@
                 </div>
                 @foreach (var itemA in listArticle[i])
                 {
-                    var urlA = "/Frontend/Article/" + itemA.IDArticle;
+                    var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
                     <div class="col-md-5">
                         <h4><a href="@urlA">@itemA.Title</a></h4>
                         <h5>@itemA.Summary</h5>
