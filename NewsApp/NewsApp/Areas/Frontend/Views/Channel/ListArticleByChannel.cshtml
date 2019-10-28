@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<Models.EF.Article>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ListArticleByChannel";
+    Layout = "~/Areas/Frontend/Views/Shared/_Layout.cshtml";
+    var nameChannel = (string)ViewBag.NameChannel;
+}
+
+@section header{
+    @nameChannel
+}
+<br />
+<br />
+<div class="grids">
+    @foreach (var item in Model)
+    {
+        var url = "/Frontend/Article/ViewArticle/" + item.IDArticle;
+        <div class="grid box">
+            <div class="grid-header">
+                <h4><a href="@url">@item.Title</a></h4>
+                <ul>
+                    <li><span>Post By @item.Author on @item.Date</span></li>
+                </ul>
+            </div>
+            <div class="grid-img-content">
+                <div class="col-md-3">
+                    <br />
+                    <a href="@url"><img src=@item.Image alt="" width="200" height="200" /></a>
+                </div>
+                <div class="col-md-5">
+                    <p>@item.Summary</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br /><br />
+    }
+    <div class="clearfix"> </div>
+</div>
+@Html.PagedListPager(Model, page => Url.Action(@nameChannel + "-" + @Model[0].IDChannel, new { page }))
+
+

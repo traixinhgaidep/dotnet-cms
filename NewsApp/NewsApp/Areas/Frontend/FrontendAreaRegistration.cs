@@ -16,7 +16,7 @@ namespace NewsApp.Areas.Frontend
         {
             context.MapRoute(
                 "Frontend_default",
-                "Frontend/{controller}/{action}/{id}",
+                "{controller}/{action}/{id}",
                 new { action = "Index", controller="Home", id = UrlParameter.Optional }
             );
         }

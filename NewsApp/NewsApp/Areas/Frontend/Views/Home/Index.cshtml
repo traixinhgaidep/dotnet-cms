@@ -13,14 +13,14 @@
     <div>
         @for (int i = 0; i < Model.Count; i++)
         {
-            var url = "/Channel/" + Model[i].Name + "-" + Model[i].IDChannel;
+            var url = "/Frontend/Channel/ListArticleByChannel/" + Model[i].IDChannel;
             <div>
                 <div class="col-md-5">
                     <h3>@Model[i].Name</h3>
                     <h5>@Model[i].Summary</h5>
                 </div>
                 <div class="col-md-8">
-                    <a href="@url"><h6 text-align="right">Xem tat ca</h6></a>
+                    <a href="@url"><h6 text-align="right">Xem tất cả</h6></a>
                 </div>
             </div>
             <br />
@@ -30,7 +30,7 @@
                 </div>
                 @foreach (var itemA in listArticle[i])
                 {
-                    var urlA = "/Article/" + itemA.IDArticle;
+                    var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
                     <div class="col-md-5">
                         <h4><a href="@urlA">@itemA.Title</a></h4>
                         <h5>@itemA.Summary</h5>
