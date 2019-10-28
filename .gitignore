@@ -354,3 +354,4 @@ MigrationBackup/
 
 # Ignore web.config
 NewsApp/NewsApp/Web.config
+NewsApp/Models/App.config
