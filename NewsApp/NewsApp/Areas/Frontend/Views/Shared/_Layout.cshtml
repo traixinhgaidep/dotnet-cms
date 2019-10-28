@@ -1,0 +1,45 @@
+﻿@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEWS</title>
+    @Styles.Render("~/Frontend/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Archive Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    @Scripts.Render("~/Frontend/script")
+</head>
+<body>
+    <!-- header -->
+    <div class="content-main">
+        <div class="container">
+            <div class="col-md-3 top-left">
+                @{Html.RenderAction("LeftMenu", "Home");}
+            </div>
+            <div class="col-md-9 top-right">
+                <div class="achives-content">
+                    <h2> @RenderSection("header", required: true)</h2>
+                    @RenderBody()
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <p>Copyrights © @DateTime.Now.Year Archive All rights reserved</p>
+        </div>
+    </div>
+    <!-- footer -->
+</body>
+</html>
