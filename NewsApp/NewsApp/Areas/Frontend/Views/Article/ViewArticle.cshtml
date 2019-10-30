@@ -3,27 +3,63 @@
 @{
     ViewBag.Title = "ViewArticle";
     Layout = "~/Areas/Frontend/Views/Shared/_Layout.cshtml";
+    var nameChannel = (string)ViewBag.NameChannel;
+    var listArticle = (List<Models.EF.Article>)ViewBag.ListArticle;
 }
 
 @section header{
-    @Model.Title
+    @nameChannel
 }
 
-<div class="grid box">
-    <div class="grid-header">
-        <ul>
-            <li><span>Post By @Model.Author on @Model.Date</span></li>
-        </ul>
-    </div>
-    <div class="singlepage">
-        <img src=@Model.Image class="img-responsive" />
-        <p class="sng">@Model.Summary</p>
-        <p>@Model.Content</p>
-        <div class="clearfix"></div>
+<div class="col-md-9 blog-content">
+    <div class="blog-detail">
+        <div class="bc-inner">
+            <div class="post-detail">
+                <h2 class="bci-header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.Title</font></font></h2>
+                <div class="row">
+                    <p class="post-meta post-date col-xs-6" style="padding-top: 20px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@(Model.Date.HasValue ? @Model.Date.Value.ToString("dd/MM/yyyy") : "")</font></font></p>
+                    <div class="post-like col-xs-6 text-right" data-post-id="838">
+                        <span data-count-view="" style="font-size: 17px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">265</font></font></span>
+                        <i class="fa fa-eye eye-view" aria-hidden="true"></i>
+
+                        <a href="javascript:void(0)" class="btn-link number-size count-like" data-count-like=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">15</font></font></a>
+                        <button class="btn-primary-outline" type="button" data-post-btn="like" data-item-id="838">
+                            <i class="fa fa-thumbs-up thumb-size thumb-dislike" aria-hidden="true" data-post-icon="like" title="Like"></i>
+                        </button>
+
+                        <span class="number-size count-comment" data-count-cmt=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></span>
+                        <i class="fa fa-comments comment-icon thumb-size" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="post-desc cke" style="padding-top: 15px">
+                    <p>@Model.Summary</p>
+                    <br/>
+                    <img class="new-icon" src=@Model.Image>
+                    <br/><br/>
+                    <p>@Model.Content</p>
+                </div>
+                <div>
+                    <p class="author" style="padding-top: 27px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- @Model.Author -</font></font></p>
+                </div>
+            </div>
+            <div class="post-relate">
+                <div class="blog-box-title">
+                    <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Related posts</font></font></span>
+                </div>
+                <div class="blog-box-content">
+                    <ul>
+                        @foreach (var item in listArticle)
+                        {
+                            var url = "/Frontend/Article/ViewArticle/" + item.IDArticle;
+                            <li>
+                                <a href="@url"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Summary</font></font></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div>
-    <a href="/Frontend/Channel/ListArticleByChannel/@Model.IDChannel">Back to list</a>  
-</div>
-<div class="clearfix"> </div>
+
 

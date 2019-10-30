@@ -17,7 +17,7 @@ namespace NewsApp.Areas.Frontend.Controllers
             List<List<Article>> listArticle = new List<List<Article>>();
             foreach (var item in channel)
             {
-                listArticle.Add(new ArticleModel().ListArticleByChannel(5, item.IDChannel));
+                listArticle.Add(new ArticleModel().ListArticleByChannel(3, item.IDChannel));
             }
             ViewBag.Article = listArticle;
             return View(channel);

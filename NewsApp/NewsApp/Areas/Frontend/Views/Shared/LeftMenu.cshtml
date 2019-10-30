@@ -1,16 +1,50 @@
 ﻿@model List<Models.EF.Channel>
 
-<div class="logo">
-    <a href="/Frontend/Home/Index/"><img src="/Assets/Frontend/images/logo.png" class="img-responsive" alt="" /></a>
+
+<div class="blog-sidebar-wrapper col-md-3">
+    <div class="box box-primary box-solid collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </h3>
+        </div>
+        <div class="box-body">
+            <div class="blog-sidebar">
+                <div class="blog-search">
+                    <form method="get" action="https://rikkei.vn/news">
+                        <div class="search-box">
+                            <input class="search-input" name="search" value="" placeholder="Tìm kiếm ...">
+                            <button type="submit" class="search-btn">
+                                <i class="fa fa-search">
+                                    Tìm
+                                </i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="blog-category">
+                    <div class="bc-header">
+                        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Danh mục</font></font></strong>
+                    </div>
+                    <div class="bc-content">
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                var url = "/Frontend/Channel/ListArticleByChannel/" + item.IDChannel;
+                                <li>
+                                    <a href="@url">
+                                        <i class="fa fa-chevron-right bc-icon bc-element"></i> &nbsp;&nbsp;
+                                        <span class="bc-text bc-element"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></span>
+                                    </a>
+                                </li>
+                            }                         
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<label></label>
-<h4 class="menn">Danh mục</h4>
-<div class="head-nav">
-    <span class="menu"> </span>
-    @foreach (var item in Model)
-    {
-        var url = "/Frontend/Channel/ListArticleByChannel/" + item.IDChannel;
-        <h4><a href="@url"><i class="fa fa-link"></i> <span>@item.Name</span></a></h4>
-    }
-</div>
-<div class="clearfix"> </div>
+
