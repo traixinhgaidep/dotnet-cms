@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Models;
 using NewsApp.Areas.Admin.Models;
 
 namespace NewsApp.Areas.Admin.Controllers
@@ -481,5 +482,11 @@ namespace NewsApp.Areas.Admin.Controllers
             }
         }
         #endregion
+
+        public ActionResult Index(int page = 1, int pageSize = 10)
+        {
+            var listUser = new UserModel().ListAllPagging(page, pageSize);
+            return View(listUser);
+        }
     }
 }
