@@ -25,21 +25,21 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(model => model.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -50,10 +50,10 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.UserRole, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(model => model.UserRole, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.RadioButtonFor(m => m.UserRole, "Admin", new { @class = "radio-line" })@Html.Label("Admin")
-            @Html.RadioButtonFor(m => m.UserRole, "User", new { @class = "radio-line" })@Html.Label("User")
+            @Html.RadioButtonFor(model => model.UserRole, "Admin", new { @class = "radio-line" })@Html.Label("Admin")
+            @Html.RadioButtonFor(model => model.UserRole, "User", new { @class = "radio-line" })@Html.Label("User")
         </div>
     </div>
 

@@ -165,6 +165,47 @@ namespace NewsApp.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(string id)
+        {
+            var oUser = new UserModel().FindUserById(id);
+            AspNetUser eUser = new AspNetUser();
+            eUser.Image = oUser.Image;
+            eUser.UserRole = oUser.UserRole;
+            eUser.Id = oUser.Id;
+            return View(eUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(AspNetUser model)
+        {
+            try
+            {
+                    var result = new UserModel().Update(model);
+                    if (result)
+                    {
+                        var res = new UserModel().UpdateRole(model.Id, model.UserRole);
+                        if (res)
+                        {
+                            return RedirectToAction("Index", "Account");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Không đổi được quyền đăng nhập");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
+                    }            
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return View(model);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -475,6 +516,7 @@ namespace NewsApp.Areas.Admin.Controllers
         }
         #endregion
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
             var listUser = new UserModel().ListAllPagging(page, pageSize);

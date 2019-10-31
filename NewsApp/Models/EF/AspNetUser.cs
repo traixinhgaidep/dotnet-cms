@@ -11,26 +11,21 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
+            AspNetUserClaims = new HashSet<AspNetUserClaim>();
+            AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetRoles = new HashSet<AspNetRole>();
         }
 
         public string Id { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [StringLength(256)]
         public string Email { get; set; }
 
         public bool EmailConfirmed { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string PasswordHash { get; set; }
 
-        [Required]
-        [Display(Name = "Avatar")]
+        [StringLength(50)]
         public string Image { get; set; }
 
         public string SecurityStamp { get; set; }
@@ -48,13 +43,16 @@ namespace Models.EF
         public int AccessFailedCount { get; set; }
 
         [Required]
-        [EmailAddress]
-        [Display(Name = "User Name")]
+        [StringLength(256)]
         public string UserName { get; set; }
 
-        [Required]
-        [Display(Name = "User Role")]
         public string UserRole { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }

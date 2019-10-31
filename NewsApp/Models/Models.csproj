@@ -60,6 +60,8 @@
     <Compile Include="EF\Article.cs" />
     <Compile Include="EF\AspNetRole.cs" />
     <Compile Include="EF\AspNetUser.cs" />
+    <Compile Include="EF\AspNetUserClaim.cs" />
+    <Compile Include="EF\AspNetUserLogin.cs" />
     <Compile Include="EF\Channel.cs" />
     <Compile Include="EF\NewsAppDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -26,5 +26,42 @@ namespace Models
         {
             return context.AspNetRoles.ToList();
         }
+
+        public AspNetUser FindUserById(string id)
+        {
+            return context.AspNetUsers.Find(id);
+        }
+
+        public bool Update(AspNetUser nUser)
+        {
+            try
+            {
+                var oUser = context.AspNetUsers.Find(nUser.Id);
+                oUser.Image = nUser.Image;
+                oUser.UserRole = nUser.UserRole;
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateRole(string IdUser, string Role)
+        {
+            try
+            {
+                //var oUserRole = context.AspNetUserRoles.SingleOrDefault(x => x.UserId == IdUser);
+                var oRole = context.AspNetRoles.SingleOrDefault(x => x.Name == Role);
+                //oUserRole.RoleId = oRole.Id;
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
