@@ -21,5 +21,10 @@ namespace Models
         {
             return context.AspNetUsers.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
         }
+
+        public List<AspNetRole> ListAllRoles()
+        {
+            return context.AspNetRoles.ToList();
+        }
     }
 }

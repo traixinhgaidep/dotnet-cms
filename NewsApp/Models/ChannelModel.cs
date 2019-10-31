@@ -46,7 +46,7 @@ namespace Models
                 context.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }

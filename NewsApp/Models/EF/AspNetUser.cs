@@ -16,13 +16,21 @@ namespace Models.EF
 
         public string Id { get; set; }
 
-        [StringLength(256)]
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         public bool EmailConfirmed { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string PasswordHash { get; set; }
 
+        [Required]
+        [Display(Name = "Avatar")]
         public string Image { get; set; }
 
         public string SecurityStamp { get; set; }
@@ -40,9 +48,12 @@ namespace Models.EF
         public int AccessFailedCount { get; set; }
 
         [Required]
-        [StringLength(256)]
+        [EmailAddress]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "User Role")]
         public string UserRole { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
