@@ -5,6 +5,7 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Article
     {
@@ -22,7 +23,7 @@ namespace Models.EF
         [StringLength(500)]
         public string Summary { get; set; }
 
-        [StringLength(1000)]
+        [AllowHtml]
         public string Content { get; set; }
 
         [StringLength(50)]

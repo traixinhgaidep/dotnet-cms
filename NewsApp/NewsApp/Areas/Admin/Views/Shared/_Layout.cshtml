@@ -20,7 +20,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home" , new { area = "Admin" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "Admin" })</li>
                     <li>
                         <a href="#">Channel</a>
                         <div class="sub-menu">
@@ -61,9 +61,10 @@
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Admin/bundles/unobtrusive-ajax");
+    @Scripts.Render("~/Admin/bundles/unobtrusive-ajax")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Admin/bundles/ckfinder")
+    @Scripts.Render("~/Admin/bundles/ckeditor")
     @RenderSection("scripts", required: false)
     @RenderSection("jsFooter", required: false);
 </body>

@@ -33,6 +33,10 @@ namespace NewsApp.Areas.Admin
             bundles.Add(new ScriptBundle("~/Admin/bundles/ckfinder").Include(
                       "~/Areas/Admin/Content/plugins/ckfinder/ckfinder.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/Admin/bundles/ckeditor").Include(
+                      "~/Areas/Admin/Content/plugins/ckeditor/ckeditor.js"
+                ));
         }
 
     }
