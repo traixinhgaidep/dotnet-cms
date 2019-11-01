@@ -10,13 +10,13 @@ namespace NewsApp.Areas.Frontend
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/Frontend/css").Include(
-                "~/Assets/Frontend/css/bootstrap.css",
-                "~/Assets/Frontend/css/style.css",
-                "~/Assets/Frontend/css/flexslider.css"
+                "~/Areas/Frontend/Content/css/bootstrap.css",
+                "~/Areas/Frontend/Content/css/style.css",
+                "~/Areas/Frontend/Content/css/flexslider.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/Frontend/script").Include(
-                "~/Assets/Frontend/js/jquery.min.js"
+                "~/Areas/Frontend/Content/js/jquery.min.js"
                 ));
         }
     }

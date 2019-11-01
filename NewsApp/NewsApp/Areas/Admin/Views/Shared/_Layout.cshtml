@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - NEWS Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,14 +16,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("NEWS", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("NEWS", "Index", "Home", new { area = "Frontend" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/Frontend/Home/Index">Home</a></li>
-                    <li>@Html.ActionLink("Channel", "Index", "Channel")</li>
-                    <li>@Html.ActionLink("Article", "Index", "Article")</li>
-                    <li>@Html.ActionLink("User", "Index", "Account")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home" , new { area = "Admin" })</li>
+                    <li>
+                        <a href="#">Channel</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>@Html.ActionLink("List channel", "Index", "Channel")</li>
+                                <li>@Html.ActionLink("Add new channel", "Create", "Channel")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">Article</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>@Html.ActionLink("List article", "Index", "Article")</li>
+                                <li>@Html.ActionLink("Add new article", "Create", "Article")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">Account</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>@Html.ActionLink("List user", "Index", "Account")</li>
+                                <li>@Html.ActionLink("Add new user", "Create", "Account")</li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,15 +56,16 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="panel-footer">
             <p>&copy; @DateTime.Now.Year - NEWS Application</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Admin/bundles/unobtrusive-ajax");
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Admin/bundles/ckfinder")
     @RenderSection("scripts", required: false)
+    @RenderSection("jsFooter", required: false);
 </body>
 </html>
 
