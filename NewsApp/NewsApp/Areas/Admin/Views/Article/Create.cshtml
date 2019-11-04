@@ -16,10 +16,6 @@
             finder.popup();
         })
 
-        var editor = CKEDITOR.replace('txtSummary', {
-            customConfig: '/Areas/Admin/Content/plugins/ckeditor/config.js',
-        });
-
         var editor = CKEDITOR.replace('txtContent', {
             customConfig: '/Areas/Admin/Content/plugins/ckeditor/config.js',
         });
@@ -75,7 +71,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-5">
-                        @Html.TextAreaFor(model => model.Summary, new { @class = "form-control", id = "txtSummary" })
+                        @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
                     </div>
                 </div>

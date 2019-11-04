@@ -34,12 +34,10 @@
                 <div class="post-desc cke" style="padding-top: 15px">
                     <p>@Model.Summary</p>
                     <br/>
-                    <img class="new-icon" src=@Model.Image>
-                    <br/><br/>
-                    <p>@Model.Content</p>
+                    <p>@Html.Raw(Model.Content)</p>
                 </div>
                 <div>
-                    <p class="author" style="padding-top: 27px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- @Model.Author -</font></font></p>
+                    <p class="author" style="padding-top: 15px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- @Model.Author -</font></font></p>
                 </div>
             </div>
             <div class="post-relate">
