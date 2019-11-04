@@ -20,6 +20,10 @@
     border-top: 3px solid #B71C1C;
 }
 
+.container-fluid .breadcrumb {
+    background-color: #d2d6de;
+}
+
 .main-footer {
     position: fixed;
     bottom: 0;
