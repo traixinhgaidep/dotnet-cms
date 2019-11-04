@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section jsFooter{
@@ -24,12 +24,11 @@
         <h1>
             Sửa danh mục báo
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li class="active">Sửa</li>
-        </ol>
     </div>
-
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Danh mục", "Index", "Channel")</li>
+        <li class="active">Sửa danh mục</li>
+    </ol>
     <section class="content">
         @using (Html.BeginForm("Edit", "Channel", FormMethod.Post))
         {
@@ -73,8 +72,5 @@
                 </div>
             </div>
         }
-        <div>
-            @Html.ActionLink("Back to List", "Index", "Channel")
-        </div>
     </section>
 </div>

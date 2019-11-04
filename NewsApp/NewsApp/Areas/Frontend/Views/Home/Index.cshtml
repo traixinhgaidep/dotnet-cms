@@ -6,41 +6,100 @@
 }
 
 @section header{
-    Trang chủ
+    Tin tức
 }
 
-<div class="achives-top">
-    <div>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            var url = "/Frontend/Channel/ListArticleByChannel/" + Model[i].IDChannel;
-            <div>
-                <div class="col-md-5">
-                    <h3>@Model[i].Name</h3>
-                    <h5>@Model[i].Summary</h5>
-                </div>
-                <div class="col-md-8">
-                    <a href="@url"><h6 text-align="right">Xem tất cả</h6></a>
-                </div>
-            </div>
-            <br />
-            <div>
-                <div class="col-md-5">
-                    <img src=@Model[i].Image class="img-responsive" alt="" width="200" height="200" />
-                </div>
-                @foreach (var itemA in listArticle[i])
+<div class="col-md-9 blog-content">
+    <div class="blog-list">
+        <div class="bc-inner">
+            <div class="row bl-row">
+                @for (int i = 0; i < Model.Count; i++)
                 {
-                    var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
-                    <div class="col-md-5">
-                        <h4><a href="@urlA">@itemA.Title</a></h4>
-                        <h5>@itemA.Summary</h5>
+                    var url = "/Frontend/Channel/ListArticleByChannel/" + Model[i].IDChannel;
+                    <div>
+                        <div>
+                            <h3 class="name_channel">@Model[i].Name</h3>
+                            <a href="@url" class="list-view"><h6>Xem tất cả</h6></a>                           
+                        </div>
+                        <div>
+                            <h5>@Model[i].Summary</h5>
+                        </div>
+                    </div>
+                    <br />
+                    <div>
+                        @foreach (var itemA in listArticle[i])
+                        {
+                            var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
+                            <div class="col-md-4 hight-same bl-post-item">
+                                <div class="bc-item" style="height: 559px;">
+                                    <h3 class="bci-header" style="height: 75px;">
+                                        <a href=@urlA>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">
+                                                    @itemA.Title
+                                                </font>
+                                            </font>
+                                        </a>
+                                    </h3>
+                                    <div class="thumbnail">
+                                        <a href="@urlA">
+                                            <img class="new-icon" src=@itemA.Image>
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        <p class="post-meta date col-xs-6"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@(itemA.Date.HasValue ? @itemA.Date.Value.ToString("dd/MM/yyyy") : "")</font></font></p>
+                                        <div class="post-like col-xs-6 text-right" data-post-id="844">
+                                            <span class="number-size" style="text-decoration:none;" data-count-view=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">125</font></font></span>
+                                            <i class="fa fa-eye eye-view" aria-hidden="true"></i>
+
+                                            <a href="javascript:void(0)" class="btn-link number-size count-like" data-count-like=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></a>
+                                            <button class="btn-primary-outline" type="button" data-post-btn="like" data-item-id="844">
+                                                <i class="fa fa-thumbs-up thumb-size thumb-dislike" aria-hidden="true" data-post-icon="like" title="Like"></i>
+                                            </button>
+                                            <span class="number-size" data-count-cmt=""></span>
+                                            <i class="fa fa-comments comment-icon thumb-size" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="post-desc cke" style="height: 135px;">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">
+                                                @itemA.Summary
+                                            </font>
+                                        </font>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 post-author">
+                                            @itemA.Author
+                                        </div>
+                                        <div class="col-xs-4 post-read-more">
+                                            <a href="@urlA"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Xem chi tiết</font></font></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 }
             </div>
-            <div class="clearfix"> </div>
-            <br />
-            <br />
-        }
+            @*<div class="pagination-wrapper text-center">
+                    <ul class="pagination">
+                        <li class="disabled"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">«</font></font></span></li>
+                        <li class="active"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">first</font></font></span></li>
+                        <li><a href="https://rikkei.vn?page=2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=6"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=7"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=8"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8</font></font></a></li>
+                        <li class="disabled"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">...</font></font></span></li>
+                        <li><a href="https://rikkei.vn?page=55"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">55</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=56"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">56</font></font></a></li>
+                        <li><a href="https://rikkei.vn?page=2" rel="next"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">»</font></font></a></li>
+                    </ul>
+                </div>*@
+        </div>
     </div>
 </div>
+
 

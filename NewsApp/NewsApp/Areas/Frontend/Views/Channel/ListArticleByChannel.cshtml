@@ -10,34 +10,67 @@
 @section header{
     @nameChannel
 }
-<br />
-<br />
-<div class="grids">
-    @foreach (var item in Model)
-    {
-        var url = "/Frontend/Article/ViewArticle/" + item.IDArticle;
-        <div class="grid box">
-            <div class="grid-header">
-                <h4><a href="@url">@item.Title</a></h4>
-                <ul>
-                    <li><span>Post By @item.Author on @item.Date</span></li>
-                </ul>
+
+<div class="col-md-9 blog-content">
+    <div class="blog-list">
+        <div class="bc-inner">
+            <div class="row bl-row">
+                @foreach (var itemA in Model)
+                {
+                    var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
+                    <div class="col-md-4 hight-same bl-post-item">
+                        <div class="bc-item" style="height: 559px;">
+                            <h3 class="bci-header" style="height: 75px;">
+                                <a href=@urlA>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            @itemA.Title
+                                        </font>
+                                    </font>
+                                </a>
+                            </h3>
+                            <div class="thumbnail">
+                                <a href="@urlA">
+                                    <img class="new-icon" src=@itemA.Image>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <p class="post-meta date col-xs-6"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@(itemA.Date.HasValue ? @itemA.Date.Value.ToString("dd/MM/yyyy") : "")</font></font></p>
+                                <div class="post-like col-xs-6 text-right" data-post-id="844">
+                                    <span class="number-size" style="text-decoration:none;" data-count-view=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">125</font></font></span>
+                                    <i class="fa fa-eye eye-view" aria-hidden="true"></i>
+
+                                    <a href="javascript:void(0)" class="btn-link number-size count-like" data-count-like=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></a>
+                                    <button class="btn-primary-outline" type="button" data-post-btn="like" data-item-id="844">
+                                        <i class="fa fa-thumbs-up thumb-size thumb-dislike" aria-hidden="true" data-post-icon="like" title="Like"></i>
+                                    </button>
+                                    <span class="number-size" data-count-cmt=""></span>
+                                    <i class="fa fa-comments comment-icon thumb-size" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="post-desc cke" style="height: 135px;">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        @itemA.Summary
+                                    </font>
+                                </font>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8 post-author">
+                                    @itemA.Author
+                                </div>
+                                <div class="col-xs-4 post-read-more">
+                                    <a href="@urlA"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Xem chi tiết</font></font></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="grid-img-content">
-                <div class="col-md-3">
-                    <br />
-                    <a href="@url"><img src=@item.Image alt="" width="200" height="200" /></a>
-                </div>
-                <div class="col-md-5">
-                    <p>@item.Summary</p>
-                </div>
-            </div>
+            @Html.PagedListPager(Model, page => Url.Action(@nameChannel + "-" + @Model[0].IDChannel, new { page }))
         </div>
-        <div class="clearfix"></div>
-        <br /><br />
-    }
-    <div class="clearfix"> </div>
+    </div>
 </div>
-@Html.PagedListPager(Model, page => Url.Action(@nameChannel + "-" + @Model[0].IDChannel, new { page }))
+
 
 

@@ -3,8 +3,6 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models
 {
@@ -30,6 +28,11 @@ namespace Models
         public List<Article> ListArticleByChannel(int top, int idChannel)
         {
             return context.Articles.Where(x => x.IDChannel == idChannel).OrderByDescending(x => x.Date).Take(top).ToList();
+        }
+
+        public List<Article> ListArticleByChannel(int top, int idChannel , int idArticle)
+        {
+            return context.Articles.Where(x => x.IDChannel == idChannel && x.IDArticle != idArticle).OrderByDescending(x => x.Date).Take(top).ToList();
         }
 
         public IEnumerable<Article> ListAllPagingByChannel(int idChannel,int page,int pageSize)

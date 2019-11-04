@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section jsFooter{
@@ -22,14 +22,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit Article
+            Sửa tin tức
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Edit Article</li>
-        </ol>
     </section>
-
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Tin tức", "Index", "Article")</li>
+        <li class="active">Sửa tin tức</li>
+    </ol>
     <section class="content">
 
         @using (Html.BeginForm())
@@ -37,7 +36,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>Nhap thong tin bai bao</h4>
+                <h4>Nhập thông tin bài báo</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.IDArticle)
@@ -90,9 +89,6 @@
                 </div>
             </div>
         }
-        <div>
-            @Html.ActionLink("Back to List", "Index", "Article")
-        </div>
     </section>
 </div>
 

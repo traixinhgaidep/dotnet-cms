@@ -11,8 +11,7 @@ namespace Models.EF
         [Key]
         public int IDChannel { get; set; }
 
-        [StringLength(15, ErrorMessage = "So ki tu toi da la 15")]
-        [Required(ErrorMessage = "Ban chua nhap ten danh muc")]
+        [StringLength(15)]
         public string Name { get; set; }
 
         [StringLength(50)]

@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Models;
+using Models.EF;
 using NewsApp.Areas.Admin.Models;
 
 namespace NewsApp.Areas.Admin.Controllers
@@ -136,8 +138,8 @@ namespace NewsApp.Areas.Admin.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create()
         {
             return View();
         }
@@ -145,30 +147,62 @@ namespace NewsApp.Areas.Admin.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = model.UserRole};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = model.UserRole, Image = model.Image};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
+            return View(model);
+        }
 
-            // If we got this far, something failed, redisplay form
+        public ActionResult Edit(string id)
+        {
+            var oUser = new UserModel().FindUserById(id);
+            AspNetUser eUser = new AspNetUser();
+            eUser.Image = oUser.Image;
+            eUser.UserRole = oUser.UserRole;
+            eUser.Id = oUser.Id;
+            return View(eUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(AspNetUser model)
+        {
+            try
+            {
+                    var result = new UserModel().Update(model);
+                    if (result)
+                    {
+                        var res = new UserModel().UpdateRole(model.Id, model.UserRole);
+                        if (res)
+                        {
+                            return RedirectToAction("Index", "Account");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Không đổi được quyền đăng nhập");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
+                    }            
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
             return View(model);
         }
 
@@ -481,5 +515,12 @@ namespace NewsApp.Areas.Admin.Controllers
             }
         }
         #endregion
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index(int page = 1, int pageSize = 10)
+        {
+            var listUser = new UserModel().ListAllPagging(page, pageSize);
+            return View(listUser);
+        }
     }
 }
