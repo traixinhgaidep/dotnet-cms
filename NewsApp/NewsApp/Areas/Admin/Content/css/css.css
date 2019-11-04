@@ -1,7 +1,37 @@
 ﻿body {
+    min-height: 100%;
+    position: relative;
+    background-color: #ecf0f5;
 }
 
-*{
+.content-wrapper {
+    padding-bottom: 60px;
+    background-color: #ecf0f5;
+}
+
+.content-wrapper .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.box {
+    padding: 20px 25px 10px 25px;
+    background-color: #fff;
+    border-top: 3px solid #B71C1C;
+}
+
+.main-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+}
+
+* {
     padding: 0;
     margin: 0;
 }
@@ -18,7 +48,7 @@ a:focus {
 }
 
 .navbar {
-    background-color: #4e0707;
+    background-color: #B71C1C;
 }
 
 .navbar-collapse ul {
@@ -42,7 +72,7 @@ a:focus {
 }
 
 .navbar-collapse ul li a:hover{
-    background-color: #9d1515;
+    background-color: #C62828;
 }
 
 .navbar-collapse ul li > .sub-menu{
@@ -52,11 +82,11 @@ a:focus {
 
 .navbar-collapse ul li:hover > .sub-menu{
     display: block;
-    background: #4e0707;
+    background-color: #B71C1C;
 }
 
 .navbar-collapse ul li:hover > .sub-menu li a:hover{
-    color: #808080;
+    color: #fff;
 }
 
 .navbar-right .name-user{
@@ -64,7 +94,7 @@ a:focus {
 }
 
 .navbar-right li a:hover {
-    background-color: #4e0707;
+    background-color: #C62828;
 }
 
 .content-header {

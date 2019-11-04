@@ -22,8 +22,11 @@ namespace NewsApp.Areas.Admin
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Areas/Admin/Content/css/css.css",
                       "~/Areas/Admin/Content/bootstrap/bootstrap.css",
+                      "~/Areas/Admin/Content/AdminLTE/css/skins/AdminLTE.min.css",
+                      "~/Areas/Admin/Content/AdminLTE/css/skins/AdminLTE.css",
+                      "~/Areas/Admin/Content/font-awesome/css/font-awesome.min.css",
+                      "~/Areas/Admin/Content/css/css.css",
                       "~/Areas/Admin/Content/css/site.css"));
 
             bundles.Add(new ScriptBundle("~/Admin/bundles/unobtrusive-ajax").Include(
