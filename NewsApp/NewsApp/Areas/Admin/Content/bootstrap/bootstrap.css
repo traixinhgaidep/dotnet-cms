@@ -6566,7 +6566,8 @@ button.close {
 .modal-header:before,
 .modal-header:after,
 .modal-footer:before,
-.modal-footer:after {
+.modal-footer:after
+{
   display: table;
   content: " ";
 }

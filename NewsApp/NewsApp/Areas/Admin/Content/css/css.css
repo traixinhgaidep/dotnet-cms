@@ -20,6 +20,21 @@
     border-top: 3px solid #B71C1C;
 }
 
+@media screen and (max-width: 767px) {
+    .box .box-body {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+}
+
+.box .box-body {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
 .container-fluid .breadcrumb {
     background-color: #d2d6de;
 }

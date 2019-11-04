@@ -6,7 +6,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content-wrapper">
+<div class="container-fluid">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -14,20 +14,20 @@
         </h1>
     </section>
     <section class="content">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>ID Channel</th>
-                            <th>Image</th>
-                            <th>Summary</th>
-                            <th>Content</th>
-                            <th>Author</th>
-                            <th>Date</th>
-                            <th></th>
+                            <th>Tên báo</th>
+                            <th>ID danh mục báo</th>
+                            <th>Ảnh</th>
+                            <th>Tóm tắt nội dung</th>
+                            <th>Nội dung</th>
+                            <th>Tác giả</th>
+                            <th>Ngày đăng</th>
+                            <th width="5%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,25 +37,27 @@
                                 <th>@item.IDArticle</th>
                                 <th><a href="/Admin/Article/Edit/@item.IDArticle">@item.Title</a></th>
                                 <th>@item.IDChannel</th>
-                                <th><img src=@item.Image alt="" width="150" height="150" /></th>
+                                <th><img src=@item.Image alt="" width="200" height="150" /></th>
                                 <th>@item.Summary</th>
                                 <th>@item.Content</th>
                                 <th>@item.Author</th>
                                 <th>@(item.Date.HasValue ? @item.Date.Value.ToString("dd/MM/yyyy") : "")</th>
                                 <th>
-                                    @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDArticle }, new AjaxOptions
-                                     {
-                                         Confirm = "Bạn có muốn xóa bái báo này?",
-                                         OnComplete = "$('#row_" + item.IDArticle + "').remove()",
-                                     })
+                                    <span class="fa fa-trash-o">
+                                        @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDArticle }, new AjaxOptions
+                                         {
+                                             Confirm = "Bạn có muốn xóa bái báo này?",
+                                             OnComplete = "$('#row_" + item.IDArticle + "').remove()",
+                                         })
+                                    </span>
                                 </th>
                             </tr>
                         }
                     </tbody>
                 </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
-        </div>
-        @Html.PagedListPager(Model,page=>Url.Action("Index",new { page }))
+        </div>       
     </section>
 </div>
 
