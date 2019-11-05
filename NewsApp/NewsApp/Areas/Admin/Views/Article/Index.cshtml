@@ -33,25 +33,25 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr id="row_@item.IDArticle">
-                                <th>@item.IDArticle</th>
-                                <th><a href="/Admin/Article/Edit/@item.IDArticle">@item.Title</a></th>
-                                <th>@item.IDChannel</th>
-                                <th><img src=@item.Image alt="" width="200" height="150" /></th>
-                                <th>@item.Summary</th>
-                                <th>@item.Content</th>
-                                <th>@item.Author</th>
-                                <th>@(item.Date.HasValue ? @item.Date.Value.ToString("dd/MM/yyyy") : "")</th>
-                                <th>
-                                    <span class="fa fa-trash-o">
-                                        @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDArticle }, new AjaxOptions
-                                         {
-                                             Confirm = "Bạn có muốn xóa bái báo này?",
-                                             OnComplete = "$('#row_" + item.IDArticle + "').remove()",
-                                         })
-                                    </span>
-                                </th>
-                            </tr>
+                        <tr id="row_@item.IDArticle">
+                            <th>@item.IDArticle</th>
+                            <th>@Html.ActionLink(item.Title, "Edit/" + item.IDArticle, "Article")</th>
+                            <th>@item.IDChannel</th>
+                            <th><img src=@item.Image alt="" width="200" height="150" /></th>
+                            <th>@item.Summary</th>
+                            <th>@item.Content</th>
+                            <th>@item.Author</th>
+                            <th>@(item.Date.HasValue ? @item.Date.Value.ToString("dd/MM/yyyy") : "")</th>
+                            <th>
+                                <span class="fa fa-trash-o">
+                                    @Ajax.ActionLink("Delete", "Delete", new { @id = item.IDArticle }, new AjaxOptions
+                                     {
+                                         Confirm = "Bạn có muốn xóa bái báo này?",
+                                         OnComplete = "$('#row_" + item.IDArticle + "').remove()",
+                                     })
+                                </span>
+                            </th>
+                        </tr>
                         }
                     </tbody>
                 </table>

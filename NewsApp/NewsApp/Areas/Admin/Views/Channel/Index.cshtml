@@ -31,7 +31,7 @@
                         {
                             <tr id="row_@item.IDChannel">
                                 <th>@item.IDChannel</th>
-                                <th><a href="/Admin/Channel/Edit/@item.IDChannel">@item.Name</a></th>
+                                <th>@Html.ActionLink(item.Name,"Edit/" + item.IDChannel,"Channel")</th>
                                 <th><img src=@item.Image alt="" width="250" height="150" /></th>
                                 <th>@item.Summary</th>
                                 <th>
