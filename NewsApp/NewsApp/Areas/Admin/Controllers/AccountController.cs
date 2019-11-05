@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -141,7 +142,19 @@ namespace NewsApp.Areas.Admin.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            List<SelectListItem> listRoles = new List<SelectListItem>();
+            var roles = new UserModel().ListAllRoles();
+            foreach (var item in roles)
+            {
+                listRoles.Add(new SelectListItem
+                {
+                    Text = item.Name.ToString(),
+                    Value = item.Id.ToString()
+                }) ;
+            }           
+            model.UserRole = listRoles;
+            return View(model);
         }
 
         //
@@ -153,11 +166,19 @@ namespace NewsApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = model.UserRole, Image = model.Image};
+                string roles = "";
+                foreach (var role in model.UserRole)
+                {
+                    roles += role.Text + ",";
+                }                 
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = roles, Image = model.Image};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
+                    foreach (var role in model.UserRole)
+                    {
+                        await this.UserManager.AddToRoleAsync(user.Id, role.Text);
+                    }                   
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);

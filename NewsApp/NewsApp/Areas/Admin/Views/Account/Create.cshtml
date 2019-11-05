@@ -1,6 +1,7 @@
 ﻿@model NewsApp.Areas.Admin.Models.RegisterViewModel
 @{
     ViewBag.Title = "Create";
+    var listRoles = (List<SelectListItem>)ViewBag.ListRoles;
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -63,10 +64,22 @@
                     <a id="btnSelectImage" href="#">Chọn ảnh</a>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.UserRole, new { @class = "col-md-1 control-label" })
+                    @Html.LabelFor(model => model.UserRole, new { @class = "control-label col-md-1" })
                     <div class="col-md-4">
-                        @Html.RadioButtonFor(model => model.UserRole, "Admin", new { @class = "radio-line" })@Html.Label("Admin")
-                        @Html.RadioButtonFor(model => model.UserRole, "User", new { @class = "radio-line" })@Html.Label("User")
+                        <table>
+                            @for (int i = 0; i < Model.UserRole.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Html.CheckBoxFor(model => model.UserRole[i].Selected)</td> 
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserRole[i].Text)
+                                        @Html.HiddenFor(model => model.UserRole[i].Text)
+                                        @Html.HiddenFor(model => model.UserRole[i].Value)
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
                     </div>
                 </div>
 
