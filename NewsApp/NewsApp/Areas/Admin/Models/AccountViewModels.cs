@@ -95,13 +95,11 @@ namespace NewsApp.Areas.Admin.Models
         public string Id { get; set; }
 
         [Required]
-        [Display(Name = "User Role")]
+        [Display(Name = "Quyền đăng nhập")]
         public string UserRole { get; set; }
 
-        public string ConfirmPassword { get; set; }
-
         [Required]
-        [Display(Name = "Avatar")]
+        [Display(Name = "Ảnh đại diện")]
         public string Image { get; set; }
     }
 
