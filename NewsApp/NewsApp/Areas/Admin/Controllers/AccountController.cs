@@ -138,27 +138,17 @@ namespace NewsApp.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Account/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             RegisterViewModel model = new RegisterViewModel();
-            List<SelectListItem> listRoles = new List<SelectListItem>();
-            var roles = new UserModel().ListAllRoles();
-            foreach (var item in roles)
-            {
-                listRoles.Add(new SelectListItem
-                {
-                    Text = item.Name.ToString(),
-                    Value = item.Id.ToString()
-                }) ;
-            }           
+            List<SelectListItem> listRoles = new UserModel().ListAllRoles();
             model.UserRole = listRoles;
             return View(model);
         }
 
-        //
-        // POST: /Account/Register
+        // POST: /Account/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -169,19 +159,21 @@ namespace NewsApp.Areas.Admin.Controllers
                 string roles = "";
                 foreach (var role in model.UserRole)
                 {
-                    roles += role.Text + ",";
-                }                 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = roles, Image = model.Image};
+                    if(role.Selected == true)
+                    {
+                        roles += role.Text + ",";
+                    }                   
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserRole = roles, Image = model.Image };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     foreach (var role in model.UserRole)
                     {
                         await this.UserManager.AddToRoleAsync(user.Id, role.Text);
-                    }                   
+                    }
                     return RedirectToAction("Index", "Account");
                 }
-                AddErrors(result);
             }
             return View(model);
         }
@@ -189,42 +181,65 @@ namespace NewsApp.Areas.Admin.Controllers
         public ActionResult Edit(string id)
         {
             var oUser = new UserModel().FindUserById(id);
-            AspNetUser eUser = new AspNetUser();
+            List<SelectListItem> listRoles = new UserModel().SelectListRoles(id);
+            EditViewModel eUser = new EditViewModel();
+            eUser.Id = id;
             eUser.Image = oUser.Image;
-            eUser.UserRole = oUser.UserRole;
-            eUser.Id = oUser.Id;
+            eUser.UserRole = listRoles;
+            eUser.PhoneNumber = oUser.PhoneNumber;
             return View(eUser);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AspNetUser model)
+        public async Task<ActionResult> Edit(EditViewModel nUser)
         {
             try
             {
-                    var result = new UserModel().Update(model);
-                    if (result)
+                List<string> oRoles = new UserModel().ListUserRoles(nUser.Id);
+                string oroles = new UserModel().ViewRoles(nUser.Id);
+                string roles = "";
+                foreach (var role in nUser.UserRole)
+                {
+                    if (role.Selected == true)
                     {
-                        var res = new UserModel().UpdateRole(model.Id, model.UserRole);
-                        if (res)
-                        {
-                            return RedirectToAction("Index", "Account");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Không đổi được quyền đăng nhập");
-                        }
+                        roles += role.Text + ",";
                     }
-                    else
+                }
+                AspNetUser aspUser = new AspNetUser() ;
+                aspUser.Id = nUser.Id;
+                aspUser.UserRole = roles;
+                aspUser.Image = nUser.Image;
+                aspUser.PhoneNumber = nUser.PhoneNumber;
+                var result = new UserModel().Update(aspUser);
+                if (result)
+                {
+                    if(oroles != roles)
                     {
-                        ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
-                    }            
+                        foreach (var role in oRoles)
+                        {
+                            await UserManager.RemoveFromRoleAsync(aspUser.Id, role);
+                        }
+                        foreach (var role in nUser.UserRole)
+                        {
+                            if (role.Selected == true)
+                            {
+                                await UserManager.AddToRoleAsync(aspUser.Id, role.Text);
+                            }
+                        }
+                    }                   
+                    return RedirectToAction("Index", "Account");                  
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
             }
-            return View(model);
+            return View(nUser);
         }
 
         //

@@ -91,16 +91,19 @@ namespace NewsApp.Areas.Admin.Models
 
     public class EditViewModel
     {
-        [Key]
         public string Id { get; set; }
 
         [Required]
-        [Display(Name = "Quyền đăng nhập")]
-        public string UserRole { get; set; }
+        [Display(Name = "Avatar")]
+        public string Image { get; set; }
 
         [Required]
-        [Display(Name = "Ảnh đại diện")]
-        public string Image { get; set; }
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "User Role")]
+        public List<System.Web.Mvc.SelectListItem> UserRole { get; set; }
     }
 
     public class ResetPasswordViewModel

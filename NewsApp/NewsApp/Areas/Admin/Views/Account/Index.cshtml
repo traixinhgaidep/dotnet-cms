@@ -30,14 +30,14 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr id="row_@item.Id">
-                                    <th>@Html.ActionLink(item.Id, "Edit", "Account")</th>
-                                    <th>@item.Email</th>
-                                    <th><img src="@item.Image" alt="" width="150" height="150" /></th>
-                                    <th>@item.PhoneNumber</th>
-                                    <th>@item.UserName</th>
-                                    <th>@item.UserRole</th>
-                                </tr>
+                            <tr id="row_@item.Id">
+                                <th><a href="/Admin/Account/Edit/@item.Id">@item.Id</a></th>
+                                <th>@item.Email</th>
+                                <th><img src="@item.Image" alt="" width="150" height="150" /></th>
+                                <th>@item.PhoneNumber</th>
+                                <th>@item.UserName</th>
+                                <th>@item.UserRole</th>
+                            </tr>
                             }
                         </tbody>
                     </table>
