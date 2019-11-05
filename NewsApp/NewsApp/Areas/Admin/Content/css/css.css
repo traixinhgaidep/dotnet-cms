@@ -39,6 +39,12 @@
     background-color: #d2d6de;
 }
 
+.container-fluid .box-login {
+    background-color: #fff;
+    padding: 20px 40px 20px 30px;
+    border: 1px solid #d2d6de;
+}
+
 .main-footer {
     position: fixed;
     bottom: 0;
