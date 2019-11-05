@@ -20,7 +20,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home" , new { area = "Admin" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>
                         <a href="#">Channel</a>
                         <div class="sub-menu">
@@ -53,17 +53,32 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="content-wrapper">
         @RenderBody()
-        <hr />
-        <footer class="panel-footer">
-            <p>&copy; @DateTime.Now.Year - NEWS Application</p>
-        </footer>
     </div>
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <div class="pull-right hidden-xs">
+                <a href="#" style="color: #444; ">
+                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Version</font></font></b><font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            2.0.53
+                        </font>
+                    </font>
+                </a>
+            </div>
+            <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Copyright © 2019 </font></font><a href="/Frontend/Home/Index/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NEWS</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font></strong><font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                    All rights reserved.
+                </font>
+            </font>
+        </div><!-- /.container -->
+    </footer>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Admin/bundles/unobtrusive-ajax");
+    @Scripts.Render("~/Admin/bundles/unobtrusive-ajax")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Admin/bundles/ckfinder")
+    @Scripts.Render("~/Admin/bundles/ckeditor")
     @RenderSection("scripts", required: false)
     @RenderSection("jsFooter", required: false);
 </body>

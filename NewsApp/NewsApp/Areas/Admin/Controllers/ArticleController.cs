@@ -60,6 +60,7 @@ namespace NewsApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Article newArticle)
         {
             try

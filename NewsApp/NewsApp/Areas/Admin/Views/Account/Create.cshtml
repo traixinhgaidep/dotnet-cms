@@ -16,63 +16,66 @@
     </script>
 }
 
-<div class="content-wrapper">
+<div class="container-fluid">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tạo quản trị mới
+            Thêm quản trị mới
         </h1>
     </section>
     <ol class="breadcrumb">
-        <li>@Html.ActionLink("Quản trị", "Index", "Account")</li>
-        <li class="active">Tạo quản trị</li>
+        <li><i class="fa fa-laptop"></i> @Html.ActionLink("Quản trị", "Index", "Account")</li>
+        <li>
+            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thêm quản trị</font></font></span>
+        </li>
     </ol>
     <section class="content">
+        <div class="box">
+            @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Nhập thông tin quản trị</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "col-md-1 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, new { @class = "col-md-1 control-label" })
+                    <div class="col-md-4">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-md-1 control-label" })
+                    <div class="col-md-4">
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Image, new { @class = "form-control", id = "txtImage" })
+                    </div>
+                    <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRole, new { @class = "col-md-1 control-label" })
+                    <div class="col-md-4">
+                        @Html.RadioButtonFor(model => model.UserRole, "Admin", new { @class = "radio-line" })@Html.Label("Admin")
+                        @Html.RadioButtonFor(model => model.UserRole, "User", new { @class = "radio-line" })@Html.Label("User")
+                    </div>
+                </div>
 
-        @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            <h4>Nhập thông tin quản trị</h4>
-            <hr />
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-10">
+                        <input type="submit" class="btn btn-primary" value="Create" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Image,  new { @class = "form-control" , id = "txtImage" })
-                    <a id="btnSelectImage" href="#">Select Image</a>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserRole, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.RadioButtonFor(model => model.UserRole, "Admin", new { @class = "radio-line" })@Html.Label("Admin")
-                    @Html.RadioButtonFor(model => model.UserRole, "User", new { @class = "radio-line" })@Html.Label("User")
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Create" />
-                </div>
-            </div>
-        }
+            }
+        </div>
     </section>
 </div>
