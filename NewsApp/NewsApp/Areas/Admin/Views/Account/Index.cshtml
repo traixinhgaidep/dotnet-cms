@@ -25,6 +25,7 @@
                                 <th>Số điện thoại</th>
                                 <th>Tên người dùng</th>
                                 <th>Quyền đăng nhập</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,15 @@
                                 <th>@item.PhoneNumber</th>
                                 <th>@item.UserName</th>
                                 <th>@item.UserRole</th>
+                                <th>
+                                    <span class="fa fa-trash-o">
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.Id }, new AjaxOptions
+                                           {
+                                               Confirm = "Bạn có muốn xóa danh mục này không?",
+                                               OnComplete = "$('#row_" + item.Id + "').remove()",
+                                           })
+                                    </span>
+                                </th>
                             </tr>
                             }
                         </tbody>

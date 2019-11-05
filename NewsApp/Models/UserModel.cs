@@ -1,10 +1,7 @@
 ﻿using Models.EF;
 using PagedList;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Models
@@ -95,6 +92,21 @@ namespace Models
                 oUser.Image = nUser.Image;
                 oUser.PhoneNumber = nUser.PhoneNumber;
                 oUser.UserRole = nUser.UserRole;
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(string id)
+        {
+            try
+            {
+                AspNetUser dUser = context.AspNetUsers.Find(id);
+                context.AspNetUsers.Remove(dUser);
                 context.SaveChanges();
                 return true;
             }

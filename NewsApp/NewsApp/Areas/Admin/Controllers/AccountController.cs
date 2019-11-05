@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Models;
 using Models.EF;
 using NewsApp.Areas.Admin.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace NewsApp.Areas.Admin.Controllers
 {
@@ -178,6 +176,7 @@ namespace NewsApp.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             var oUser = new UserModel().FindUserById(id);
@@ -190,6 +189,7 @@ namespace NewsApp.Areas.Admin.Controllers
             return View(eUser);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EditViewModel nUser)
@@ -240,6 +240,18 @@ namespace NewsApp.Areas.Admin.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
             return View(nUser);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            List<string> oRoles = new UserModel().ListUserRoles(id);
+            foreach (var role in oRoles)
+            {
+                await UserManager.RemoveFromRoleAsync(id, role);
+            }
+            new UserModel().Delete(id);
+            return RedirectToAction("Index", "Account");
         }
 
         //
