@@ -1,16 +1,15 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Models;
 using Models.EF;
 using NewsApp.Areas.Admin.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace NewsApp.Areas.Admin.Controllers
 {
@@ -137,15 +136,17 @@ namespace NewsApp.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Account/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            List<SelectListItem> listRoles = new UserModel().ListAllRoles();
+            model.UserRole = listRoles;
+            return View(model);
         }
 
-        //
-        // POST: /Account/Register
+        // POST: /Account/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -153,57 +154,104 @@ namespace NewsApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserRole = model.UserRole, Image = model.Image};
+                string roles = "";
+                foreach (var role in model.UserRole)
+                {
+                    if(role.Selected == true)
+                    {
+                        roles += role.Text + ",";
+                    }                   
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserRole = roles, Image = model.Image };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
+                    foreach (var role in model.UserRole)
+                    {
+                        await this.UserManager.AddToRoleAsync(user.Id, role.Text);
+                    }
                     return RedirectToAction("Index", "Account");
                 }
-                AddErrors(result);
             }
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             var oUser = new UserModel().FindUserById(id);
-            AspNetUser eUser = new AspNetUser();
+            List<SelectListItem> listRoles = new UserModel().SelectListRoles(id);
+            EditViewModel eUser = new EditViewModel();
+            eUser.Id = id;
             eUser.Image = oUser.Image;
-            eUser.UserRole = oUser.UserRole;
-            eUser.Id = oUser.Id;
+            eUser.UserRole = listRoles;
+            eUser.PhoneNumber = oUser.PhoneNumber;
             return View(eUser);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AspNetUser model)
+        public async Task<ActionResult> Edit(EditViewModel nUser)
         {
             try
             {
-                    var result = new UserModel().Update(model);
-                    if (result)
+                List<string> oRoles = new UserModel().ListUserRoles(nUser.Id);
+                string oroles = new UserModel().ViewRoles(nUser.Id);
+                string roles = "";
+                foreach (var role in nUser.UserRole)
+                {
+                    if (role.Selected == true)
                     {
-                        var res = new UserModel().UpdateRole(model.Id, model.UserRole);
-                        if (res)
-                        {
-                            return RedirectToAction("Index", "Account");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Không đổi được quyền đăng nhập");
-                        }
+                        roles += role.Text + ",";
                     }
-                    else
+                }
+                AspNetUser aspUser = new AspNetUser() ;
+                aspUser.Id = nUser.Id;
+                aspUser.UserRole = roles;
+                aspUser.Image = nUser.Image;
+                aspUser.PhoneNumber = nUser.PhoneNumber;
+                var result = new UserModel().Update(aspUser);
+                if (result)
+                {
+                    if(oroles != roles)
                     {
-                        ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
-                    }            
+                        foreach (var role in oRoles)
+                        {
+                            await UserManager.RemoveFromRoleAsync(aspUser.Id, role);
+                        }
+                        foreach (var role in nUser.UserRole)
+                        {
+                            if (role.Selected == true)
+                            {
+                                await UserManager.AddToRoleAsync(aspUser.Id, role.Text);
+                            }
+                        }
+                    }                   
+                    return RedirectToAction("Index", "Account");                  
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Không sửa được thông tin người dùng.");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
             }
-            return View(model);
+            return View(nUser);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            List<string> oRoles = new UserModel().ListUserRoles(id);
+            foreach (var role in oRoles)
+            {
+                await UserManager.RemoveFromRoleAsync(id, role);
+            }
+            new UserModel().Delete(id);
+            return RedirectToAction("Index", "Account");
         }
 
         //

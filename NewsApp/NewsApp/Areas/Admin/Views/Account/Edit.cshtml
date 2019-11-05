@@ -1,4 +1,4 @@
-﻿@model Models.EF.AspNetUser
+﻿@model  NewsApp.Areas.Admin.Models.EditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -18,7 +18,7 @@
     </script>
 }
 
-<div class="content-wrapper">
+<div class="container-fluid">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -26,45 +26,60 @@
         </h1>
     </section>
     <ol class="breadcrumb">
-        <li>@Html.ActionLink("Quản trị", "Index", "Account")</li>
-        <li class="active">Sửa thông tin</li>
+        <li><i class="fa fa-laptop"></i> @Html.ActionLink("Quản trị", "Index", "Account")</li>
+        <li>
+            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sửa thông tin</font></font></span>
+        </li>
     </ol>
     <section class="content">
+        <div class="box">
+            @using (Html.BeginForm("Edit", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-        @using (Html.BeginForm("Edit", "Account", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h4>Nhập thông tin người dùng</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
+                <div class="form-horizontal">
+                    <h4>Nhập thông tin quản trị</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtImage" })
-                        <a id="btnSelectImage" href="#">Select Image</a>
+                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Image, new { @class = "form-control" , id = "txtImage" })                       
+                    </div> 
+                    <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserRole, new { @class = "control-label col-md-1" })
+                        <div class="col-md-4">
+                            <table>
+                                @for (int i = 0; i < Model.UserRole.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@Html.CheckBoxFor(model => model.UserRole[i].Selected)</td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.UserRole[i].Text)
+                                            @Html.HiddenFor(model => model.UserRole[i].Text)
+                                            @Html.HiddenFor(model => model.UserRole[i].Value)
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.UserRole, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        }
+            }
+        </div>
     </section>
 </div>
