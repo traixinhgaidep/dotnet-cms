@@ -12,39 +12,33 @@
 <div class="col-md-9 blog-content">
     <div class="blog-list">
         <div class="bc-inner">
-            <div class="row bl-row">
-                @for (int i = 0; i < Model.Count; i++)
-                {
-                    var url = "/Frontend/Channel/ListArticleByChannel/" + Model[i].IDChannel;
-                    <div>
-                        <div>
-                            <h3 class="name_channel">@Model[i].Name</h3>
-                            <a href="@url" class="list-view"><h6>Xem tất cả</h6></a>                           
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="row bl-row">
+                    <div class="header-channel">
+                        <div class="channel">
+                            <div class="header-left"><h3 class="name_channel">@Model[i].Name</h3></div>
+                            <div class="header-right"><h6>@Html.ActionLink("Xem tất cả", "ListArticleByChannel/" + Model[i].IDChannel, "Channel")</h6></div>
                         </div>
-                        <div>
+                        <div class="summary-channel">
                             <h5>@Model[i].Summary</h5>
                         </div>
                     </div>
                     <br />
-                    <div>
+                    <div class="body-channel">
                         @foreach (var itemA in listArticle[i])
                         {
-                            var urlA = "/Frontend/Article/ViewArticle/" + itemA.IDArticle;
                             <div class="col-md-4 hight-same bl-post-item">
                                 <div class="bc-item" style="height: 559px;">
                                     <h3 class="bci-header" style="height: 75px;">
-                                        <a href=@urlA>
+                                        <font style="vertical-align: inherit;">
                                             <font style="vertical-align: inherit;">
-                                                <font style="vertical-align: inherit;">
-                                                    @itemA.Title
-                                                </font>
+                                                @Html.ActionLink(itemA.Title, "ViewArticle/" + itemA.IDArticle, "Article")
                                             </font>
-                                        </a>
+                                        </font>
                                     </h3>
                                     <div class="thumbnail">
-                                        <a href="@urlA">
-                                            <img class="new-icon" src=@itemA.Image>
-                                        </a>
+                                        <img class="new-icon" src=@itemA.Image>
                                     </div>
                                     <div class="row">
                                         <p class="post-meta date col-xs-6"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@(itemA.Date.HasValue ? @itemA.Date.Value.ToString("dd/MM/yyyy") : "")</font></font></p>
@@ -56,11 +50,11 @@
                                             <button class="btn-primary-outline" type="button" data-post-btn="like" data-item-id="844">
                                                 <i class="fa fa-thumbs-up thumb-size thumb-dislike" aria-hidden="true" data-post-icon="like" title="Like"></i>
                                             </button>
-                                            <span class="number-size" data-count-cmt=""></span>
+                                            <span class="number-size" data-count-cmt=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></span>
                                             <i class="fa fa-comments comment-icon thumb-size" aria-hidden="true"></i>
                                         </div>
                                     </div>
-                                    <div class="post-desc cke" style="height: 135px;">
+                                    <div class="post-desc cke" style="height: 150px;">
                                         <font style="vertical-align: inherit;">
                                             <font style="vertical-align: inherit;">
                                                 @itemA.Summary
@@ -72,15 +66,16 @@
                                             @itemA.Author
                                         </div>
                                         <div class="col-xs-4 post-read-more">
-                                            <a href="@urlA"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Xem chi tiết</font></font></a>
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Html.ActionLink("Xem chi tiết", "ViewArticle/" + itemA.IDArticle, "Article")</font></font>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         }
                     </div>
-                }
-            </div>
+                </div>
+            }
+
             @*<div class="pagination-wrapper text-center">
                     <ul class="pagination">
                         <li class="disabled"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">«</font></font></span></li>

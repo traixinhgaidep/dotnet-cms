@@ -11,6 +11,7 @@ namespace NewsApp.Areas.Frontend
         {
             bundles.Add(new StyleBundle("~/Frontend/css").Include(
                 "~/Areas/Frontend/Content/css/bootstrap.css",
+                "~/Areas/Frontend/Content/font-awesome/css/font-awesome.min.css",
                 "~/Areas/Frontend/Content/css/style.css",
                 "~/Areas/Frontend/Content/css/flexslider.css"
                 ));

@@ -32,12 +32,10 @@
                     </div>
                 </div>
                 <div class="post-desc cke" style="padding-top: 15px">
-                    <p>@Model.Summary</p>
-                    <br/>
                     <p>@Html.Raw(Model.Content)</p>
                 </div>
                 <div>
-                    <p class="author" style="padding-top: 15px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- @Model.Author -</font></font></p>
+                    <p class="author" style="padding-top: 15px; color:royalblue;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.Author</font></font></p>
                 </div>
             </div>
             <div class="post-relate">
@@ -48,10 +46,13 @@
                     <ul>
                         @foreach (var item in listArticle)
                         {
-                            var url = "/Frontend/Article/ViewArticle/" + item.IDArticle;
-                            <li>
-                                <a href="@url"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Summary</font></font></a>
-                            </li>
+                        <li>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">
+                                    @Html.ActionLink(item.Title, "ViewArticle/" + item.IDArticle, "Article")
+                                </font>
+                            </font>
+                        </li>
                         }
                     </ul>
                 </div>
